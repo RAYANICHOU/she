@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: "#ECE3D3",
     },
     darkContainer: {
       flex: 1,
@@ -46,6 +47,18 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       color: 'white', // Couleur du texte pour la visibilité
     },
+
+lockedCategory: {
+  opacity: 0.5, // Assombrit la catégorie
+},
+
+lockedImage: {
+  width: 50, 
+  height: 50,
+  resizeMode: 'contain'
+},
+
+
   });
 
 export default styles

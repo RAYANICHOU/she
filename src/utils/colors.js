@@ -1,5 +1,5 @@
 export const colors = {
-    primaryBackground: 'white',      // Couleur de fond principale
+    primaryBackground: '#ECE3D3',      // Couleur de fond principale
     secondaryBackground: 'white',      // Couleur de fond secondaire
     textPrimary: '#333',               // Texte principal
     textSecondary: '#888',             // Texte secondaire

@@ -56,8 +56,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
     borderWidth: 3,
-    borderColor: 'skyblue',
-    backgroundColor: colors.secondaryBackground,
+    borderColor: '#1E7FCB',
+    backgroundColor: "#F1EBE0",
     elevation: 5,
   },
   darkCard: {
@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderWidth: 2,
-    borderColor: 'skyblue',
+    borderColor: '#1E7FCB',
     margin: 2,
     justifyContent: 'center',
     alignItems: 'center',
@@ -126,8 +126,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 7,
-    borderRadius: 15,
-    backgroundColor: colors.secondaryBackground,
+    borderRadius: 15
   },
   
   darkClavier: {
@@ -160,7 +159,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.accent,
     borderWidth: 2,
     borderColor: colors.primaryBackground,
-    color: 'white', // Modifier cette ligne
+    color: 'white', 
   },
   
   lettreText: {

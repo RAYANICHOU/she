@@ -1,23 +1,29 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { Alert, Text, TouchableOpacity, Vibration, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, Vibration, View, TouchableWithoutFeedback, Animated } from 'react-native';
 import { Card } from 'react-native-elements';
 import { motsBibliotheque } from '../../../assets/data/mots';
 import { useLanguage } from '../../context/LangageContexte';
 import { useTheme } from '../../context/ThemeContexte';
 import { lettresClavier } from '../../utils/lettres';
 import { styles } from './style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useGame } from '../../context/GameContexte';
+
+
+
 
 const maxEssaisParMot = 3;
 
 export default function GameScreen() {
+  
+
 
   const { darkMode } = useTheme();
   const { translate } = useLanguage();
   const [motsRestants, setMotsRestants] = useState([...motsBibliotheque]);
   const [motEnCours, setMotEnCours] = useState(null);
   const [essaisRestants, setEssaisRestants] = useState(maxEssaisParMot);
-  const [jetons, setJetons] = useState(100);
   const [lettresMotEnCours, setLettresMotEnCours] = useState([]);
   const [totalJetonsGagnes, setTotalJetonsGagnes] = useState(0);
   const [pubVue, setPubVue] = useState(false);
@@ -25,6 +31,9 @@ export default function GameScreen() {
   const [clignotement, setClignotement] = useState(false);
   const [lettresCorrectes, setLettresCorrectes] = useState ([]);
   const [lettresIncorrectes, setLettresIncorrectes] = useState([]);
+  const [lettreAgrandie, setLettreAgrandie] = useState(null);
+  
+  const { jetons, niveau, updateJetons, updateNiveau } = useGame();
 
 
   const containerStyle = darkMode ? styles.darkContainer : styles.container;
@@ -42,9 +51,102 @@ export default function GameScreen() {
   const navigation = useNavigation();
   const route = useRoute();
   const selectedCategory = route.params?.category;
+  const categoriesDebloquees = route.params?.categoriesDebloquees || [];
+
   
+  const STORAGE_KEY = 'gameState';
+
+  useEffect(() => {
+    const loadGameState = async () => {
+      try {
+        const savedStateJSON = await AsyncStorage.getItem(STORAGE_KEY);
+        const savedCategory = await AsyncStorage.getItem('selectedCategory');
   
+        if (savedStateJSON) {
+          const savedState = JSON.parse(savedStateJSON);
+          // Restaurez l'état du jeu à partir des données stockées
+          setMotsRestants(savedState.motsRestants);
+          setMotEnCours(savedState.motEnCours);
+          setEssaisRestants(savedState.essaisRestants);
+         
+        } else {
+          if (savedCategory) {
+            initialiserJeuAvecCategorie(savedCategory);
+          } else {
+            choisirMotAleatoire();
+          }
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement de l\'état du jeu:', error);
+      }
+    };
   
+    loadGameState();
+  }, []);
+  
+
+  useEffect(() => {
+    const saveGameState = async () => {
+      try {
+        const gameState = {
+          motsRestants,
+          motEnCours,
+          essaisRestants,
+          jetons,
+          niveau,
+        };
+        const gameStateJSON = JSON.stringify(gameState);
+        await AsyncStorage.setItem(STORAGE_KEY, gameStateJSON);
+      } catch (error) {
+        console.error('Erreur lors de la sauvegarde de l\'état du jeu:', error);
+      }
+    };
+
+    saveGameState();
+  }, [motsRestants, motEnCours, essaisRestants, jetons, niveau]);
+
+
+
+
+  const initialiserJeuAvecCategorie = (category) => {
+    const motsFiltres = motsBibliotheque.filter((mot) => mot.catégorie === category);
+  
+    if (!motsFiltres.length) {
+      Alert.alert(translate('congratulations'), translate('guessedAllWords'));
+      navigation.navigate('CATEGORIE');
+      return;
+    }
+  
+    const indexMotAleatoire = Math.floor(Math.random() * motsFiltres.length);
+    const nouveauMotObj = motsFiltres[indexMotAleatoire];
+    const nouveauMot = nouveauMotObj.mot;
+    const indiceDuMot = nouveauMotObj.indice;
+  
+    setMotEnCours(nouveauMot);
+    setIndiceMotEnCours(indiceDuMot);
+    setEssaisRestants(maxEssaisParMot);
+    setMotsRestants(motsFiltres.filter((mot) => mot !== nouveauMotObj));
+    setLettresMotEnCours([]);
+    setLettresIncorrectes([]);
+    setClignotement(false);
+  };
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   useEffect(() => {
 
     const motsFiltres = motsBibliotheque.filter((mot) => mot.catégorie === selectedCategory);
@@ -62,35 +164,43 @@ export default function GameScreen() {
       setEssaisRestants(maxEssaisParMot);
       setMotsRestants(motsFiltres.filter((mot) => mot !== nouveauMotObj));
       setLettresMotEnCours([]);
+      setLettresIncorrectes([]);
     }
   }, [selectedCategory]);
   
 
   const choisirMotAleatoire = () => {
-    
-    if (!motsRestants.length) {
-      
+    let motsFiltres;
+  
+    if (selectedCategory) {
+      motsFiltres = motsBibliotheque.filter((mot) => mot.catégorie === selectedCategory);
+    } else {
+      // Filter words based on unlocked categories when no category is selected
+      motsFiltres = motsBibliotheque.filter((mot) => categoriesDebloquees.includes(mot.catégorie));
+    }
+  
+    if (!motsFiltres.length) {
       Alert.alert(translate('congratulations'), translate('guessedAllWords'));
       navigation.navigate('CATEGORIE');
       return;
     }
-
-    const indexMotAleatoire = Math.floor(Math.random() * motsRestants.length);
-    const nouveauMotObj = motsRestants[indexMotAleatoire];
+  
+    const indexMotAleatoire = Math.floor(Math.random() * motsFiltres.length);
+    const nouveauMotObj = motsFiltres[indexMotAleatoire];
     const nouveauMot = nouveauMotObj.mot;
     const indiceDuMot = nouveauMotObj.indice;
-
+  
     setMotEnCours(nouveauMot);
     setIndiceMotEnCours(indiceDuMot);
     setEssaisRestants(maxEssaisParMot);
-    setMotsRestants(motsRestants.filter((mot) => mot !== nouveauMotObj));
+    setMotsRestants(motsFiltres.filter((mot) => mot !== nouveauMotObj));
     setLettresMotEnCours([]);
     setLettresIncorrectes([]);
     setClignotement(false);
   };
+  
 
   const verifierLettre = async (lettre) => {
-    
     const lettreEntre = lettre.toUpperCase();
   
     if (motEnCours && motEnCours.toUpperCase().includes(lettreEntre)) {
@@ -107,22 +217,33 @@ export default function GameScreen() {
     } else {
       if (!lettresIncorrectes.includes(lettreEntre)) {
         Vibration.vibrate(500);
-        setEssaisRestants(essaisRestants - 1);
-        setLettresIncorrectes([...lettresIncorrectes, lettreEntre]);
+        const nouveauxEssaisRestants = essaisRestants - 1;
   
-        if (essaisRestants === 0) {
+        if (nouveauxEssaisRestants === 0) { // Si les essais sont épuisés
+          // Vérifier si l'utilisateur a suffisamment de jetons pour la pénalité
           const penalite = 20;
-          setJetons(jetons - penalite);
-          Alert.alert(
-            translate('incorrectWord'),
-            `${translate('theWordWas')} : '${motEnCours}'. ${translate('youLost')} ${penalite} ${translate('tokens')}.`
-          );
-  
-          choisirMotAleatoire();
+          if (jetons >= penalite) {
+            updateJetons(jetons - penalite);
+            Alert.alert(
+              translate('incorrectWord'),
+              `${translate('theWordWas')} : '${motEnCours}'. ${translate('youLost')} ${penalite} ${translate('tokens')}.`
+            );
+            choisirMotAleatoire();
+          } else {
+            // Proposer de regarder une pub pour gagner des jetons, ou une autre logique appropriée
+            Alert.alert(
+              translate('notEnoughTokens'),
+              translate('watchAdOrEarnTokens')
+            );
+          }
+        } else {
+          setEssaisRestants(nouveauxEssaisRestants);
+          setLettresIncorrectes([...lettresIncorrectes, lettreEntre]);
         }
       }
     }
   };
+  
   
 
   useEffect(() => {
@@ -140,14 +261,14 @@ export default function GameScreen() {
 
   const obtenirLettreBonus = () => {
     if (motEnCours && lettresMotEnCours.length < 3) {
-      if (jetons >= 20) {
+      if (jetons >= 30) {
         for (let i = 0; i < motEnCours.length; i++) {
           const lettre = motEnCours[i].toUpperCase();
           if (!lettresMotEnCours.includes(lettre)) {
             setLettresMotEnCours([...lettresMotEnCours, lettre]);
-            setJetons(jetons - 30);
+            updateJetons(jetons - 30);
             Alert.alert(
-              translate('letterBonusObtained'),
+              translate('bonusLetterObtained'),
               `${translate('letterBonusIs')} '${lettre}'. ${translate('cost')}  30 ${translate('tokens')}.`
             );
             break;
@@ -155,7 +276,7 @@ export default function GameScreen() {
         }
       } else {
         Alert.alert(
-          translate('notEnoughTokens'),
+          translate('cannotObtainBonusLetter'),
           translate('notEnoughTokensToBuyLetterBonus')
         );
       }
@@ -166,19 +287,21 @@ export default function GameScreen() {
       );
     } else {
       Alert.alert(
-        translate('unableToGetLetterBonus'),
+        translate('cannotObtainBonusLetter'),
         translate('notEnoughTokensOrNoMoreLetters')
       );
     }
   };
 
-  const regarderPub = () => {
 
-      setJetons(jetons + 100);
-      setPubVue(true);
-      Alert.alert(translate('adWatched'), `${translate('youWon')} 100 ${translate('tokens')}`);
-    
+
+
+  const regarderPub = () => {
+    setPubVue(true); 
+    updateJetons(jetons + 100); 
+    Alert.alert(translate('adWatched'), `${translate('youWon')} 100 ${translate('tokens')}`);
   };
+  
   
   
   useEffect(() => {
@@ -197,73 +320,100 @@ export default function GameScreen() {
       const jetonsGagnes = 30;
       setTotalJetonsGagnes(totalJetonsGagnes + jetonsGagnes);
       setClignotement(true);
+     
       setTimeout(() => {
         setClignotement(false);
         choisirMotAleatoire();
         setEssaisRestants(maxEssaisParMot);
       }, 0.1);
+      updateNiveau(niveau + 1);
+
     }
   };
   
 
   const renderMotEnCours = () => {
-    
+  if (!motEnCours) return null;
+   
+  const motEnMajuscules = motEnCours.toUpperCase();
+  const toutesLesLettresDevinees = [...motEnMajuscules].every((lettre) =>
+    lettresMotEnCours.includes(lettre)
+  );
 
-    if (!motEnCours) return null;
-    const motEnMajuscules = motEnCours.toUpperCase();
-    const toutesLesLettresDevinees = [...motEnMajuscules].every((lettre) =>
-      lettresMotEnCours.includes(lettre)
-    );
-    const cases = motEnMajuscules.split('').map((lettre, index) => (
-      <View
-        key={index}
-        style={[
-          letterBoxStyle,
-          {
-            backgroundColor: clignotement ? '#1976d2' : 'transparent',
-          },
-        ]}
-      >
-        <Text style={lettreTextStyle}>{lettresMotEnCours.includes(lettre) ? lettre : ''}</Text>
-      </View>
-    ));
-    
-    return <View style={styles.motEnCoursContainer}>{cases}</View>;
+  const cases = motEnMajuscules.split('').map((lettre, index) => (
+    <View
+      key={index}
+      style={[
+        letterBoxStyle,
+        {
+          backgroundColor: clignotement ? '#1976d2' : 'transparent',
+        },
+      ]}
+    >
+      <Text style={lettreTextStyle}>
+        {lettresMotEnCours.includes(lettre) ? lettre : ''}
+      </Text>
+    </View>
+  ));
 
-  };
+  return <View style={styles.motEnCoursContainer}>{cases}</View>;
+};
+
+  
 
   const renderClavier = () => {
     return (
       <View style={clavierStyle}>
         {lettresClavier.map((lettre) => (
-          <TouchableOpacity
+          <TouchableWithoutFeedback
             key={lettre}
-            style={[
-              lettreClavierStyle,
-              {
-                backgroundColor: lettresMotEnCours.includes(lettre)
-                  ? '#1976d2'
-                  : (lettresIncorrectes.includes(lettre) ? 'red' : 'transparent'),
-              },
-            ]}
             onPress={() => verifierLettre(lettre)}
+            onPressIn={() => agrandirLettre(lettre)}
+            onPressOut={() => reduireLettre(lettre)}
             disabled={!motEnCours || lettresMotEnCours.includes(lettre)}
           >
-            <Text style={lettreTextStyle}>{lettre}</Text>
-          </TouchableOpacity>
+            <Animated.View
+              style={[
+                lettreClavierStyle,
+                {
+                  backgroundColor: lettresMotEnCours.includes(lettre)
+                    ? '#1976d2'
+                    : lettresIncorrectes.includes(lettre)
+                    ? 'red'
+                    : 'transparent',
+                  transform: [{ scale: lettreAgrandie === lettre ? 1.2 : 1 }],
+                },
+              ]}
+            >
+              <Text style={lettreTextStyle}>{lettre}</Text>
+            </Animated.View>
+          </TouchableWithoutFeedback>
         ))}
       </View>
     );
   };
+  
 
+  const agrandirLettre = (lettre) => {
+    setLettreAgrandie(lettre);
+  };
+
+  const reduireLettre = (lettre) => {
+    setTimeout(() => {
+      setLettreAgrandie(null);
+    }, 300); 
+  };
 
   return (
 
     <View style={containerStyle}>
-      <Text style={headerStyle}>{translate('appTitle')}</Text>
-      <View style={jetonsContainerStyle}>
+         {selectedCategory && <Text>Category: {selectedCategory}</Text>}
+       <View style={jetonsContainerStyle}>
         <Text style={soldeTextStyle}>🪙 {jetons + totalJetonsGagnes} {translate('tokens')}</Text>
       </View>
+      <Text style={indiceTextStyle}>Niveau: {niveau}</Text>
+
+      <Text style={headerStyle}>{translate('appTitle')}</Text>
       {renderMotEnCours()}
       <Text style={indiceTextStyle}>Indice: {indiceMotEnCours}</Text>
       <Card containerStyle={cardStyle}>

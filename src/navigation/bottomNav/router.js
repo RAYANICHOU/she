@@ -11,7 +11,18 @@ export default function Router() {
     const Tab = createBottomTabNavigator()
 
     return (
-        <Tab.Navigator>
+      <Tab.Navigator>
+          <Tab.Screen
+            name="CATEGORIE"
+            component={CategoryScreen}
+            options={{
+              tabBarLabel: 'Catégories',
+              tabBarIcon: ({ color, size }) => (
+                <Icon name="list" color={color} size={size} />
+              ),
+            }}
+          />
+          
             <Tab.Screen
               name="JEU"
               component={GameScreen}
@@ -21,16 +32,6 @@ export default function Router() {
                   <Icon name="gamepad" color={color} size={size} />
                 ),
               })}
-            />
-            <Tab.Screen
-              name="CATEGORIE"
-              component={CategoryScreen}
-              options={{
-                tabBarLabel: 'Catégories',
-                tabBarIcon: ({ color, size }) => (
-                  <Icon name="list" color={color} size={size} />
-                ),
-              }}
             />
             <Tab.Screen
               name="REGLAGES"

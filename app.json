@@ -19,13 +19,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/lea2.png",
-        "backgroundColor": ""
+        "backgroundColor": "#ffffff"
       },
-      "package": "com.alex.projectlea"
+      "package": "com.leacode.projectlea"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "extra": {
+      "eas": {
+        "projectId": "f4c1cada-eb39-443d-95e6-152557a6f1ba"
+      }
     }
-
   }
 }

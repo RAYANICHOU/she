@@ -5,11 +5,13 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
+    
     },
     section: {
       marginBottom: 16,
       padding: 16,
       borderRadius: 8,
+      backgroundColor: '#F1EBE0',
     },
     sectionTitle: {
       fontSize: 18,
