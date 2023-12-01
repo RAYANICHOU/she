@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
-  const [jetons, setJetons] = useState(100);
+  const [jetons, setJetons] = useState(300);
   const [niveau, setNiveau] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [motEnCours, setMotEnCours] = useState(null);
@@ -42,8 +42,9 @@ export const GameProvider = ({ children }) => {
     saveGameToStorage();
   }, [jetons, niveau, selectedCategory, motEnCours]);
 
-  const updateJetons = (newJetons) => {
-    setJetons(newJetons);
+  const updateJetons = async (nouveauJetons) => {
+  
+    await setJetons(nouveauJetons);
   };
 
   const updateNiveau = (newNiveau) => {

@@ -1,64 +1,70 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: "#ECE3D3",
-    },
-    darkContainer: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#2e2e2d',
-    },
-    title: {
-      fontSize: 20,
-      marginBottom: 20,
-      fontWeight: 'bold',
-    },
-    darkTitle: {
-      fontSize: 20,
-      marginBottom: 20,
-      fontWeight: 'bold',
-      color: 'white',
-    },
-    categoryButton: {
-      width: 200,
-      height: 200, // Pour ajuster la hauteur en fonction de vos besoins
-      margin: 10,
-     
-      borderRadius: 30,
-      overflow: 'hidden', // Pour masquer le débordement de l'image
-    },
-    imageBackground: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    darkImageBackground: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    categoryText: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: 'white', // Couleur du texte pour la visibilité
-    },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "#ECE3D3",
+  },
+  darkContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2e2e2d',
+  },
+  title: {
+    fontSize: RFValue(20),
+    marginBottom: RFValue(20),
+    fontWeight: 'bold',
+  },
+  darkTitle: {
+    fontSize: RFValue(20),
+    marginBottom: RFValue(20),
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  categoryButton: {
+    width: windowWidth * 0.45,
+    aspectRatio: 1,
+    margin: RFValue(5),
+    borderRadius: RFValue(30),
+    overflow: 'hidden',
+  },
+  imageBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  darkImageBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categoryText: {
+    fontSize: RFValue(20),
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  lockedCategory: {
+    opacity: 0.5,
+  },
+  lockedImage: {
+    width: RFValue(50),
+    height: RFValue(50),
+    resizeMode: 'contain',
+    marginLeft: RFValue(40),
+  },
+  lockedText: {
+    color: 'white',
+  },
+  darkLockedText: {
+    color: 'white',
+  }
+});
 
-lockedCategory: {
-  opacity: 0.5, // Assombrit la catégorie
-},
-
-lockedImage: {
-  width: 50, 
-  height: 50,
-  resizeMode: 'contain'
-},
-
-
-  });
-
-export default styles
+export default styles;

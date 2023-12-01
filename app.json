@@ -14,7 +14,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.leacode.projectlea"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,5 +29,9 @@
         "projectId": "f4c1cada-eb39-443d-95e6-152557a6f1ba"
       }
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx",
+    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
   }
 }

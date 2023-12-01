@@ -1,35 +1,40 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 16,
-    
-    },
-    section: {
-      marginBottom: 16,
-      padding: 16,
-      borderRadius: 8,
-      backgroundColor: '#F1EBE0',
-    },
-    sectionTitle: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 8,
-    },
-    option: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: 16,
-      borderRadius: 8,
-      marginBottom: 8,
-    },
-    optionTextDark: {
-      fontSize: 16,
-    },
-  });
+  container: {
+    flex: 1,
+    padding: 0.02 * windowWidth, 
+  },
+  section: {
+    marginBottom: 0.02 * windowWidth,
+    padding: 0.03 * windowWidth, 
+    borderRadius: 0.01 * windowWidth,
+    backgroundColor: '#F1EBE0',
+  },
+  sectionTitle: {
+    fontSize: 0.05 * windowWidth,
+    fontWeight: 'bold',
+    marginBottom: 0.02 * windowWidth,
+  },
+  option: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 0.03 * windowWidth,
+    borderRadius: 0.01 * windowWidth,
+    marginBottom: 0.02 * windowWidth,
+  },
+  optionTextDark: {
+    fontSize: 0.04 * windowWidth, // Utilisation de % pour rendre la taille de police proportionnelle à la largeur de l'écran
+  },
 
-  
-  export default styles
+
+
+
+
+
+});
+export default styles;

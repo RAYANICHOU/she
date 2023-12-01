@@ -1,9 +1,11 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
 import GameScreen from '../../screens/game'
 import CategoryScreen from '../../screens/categories'
 import SettingScreen from '../../screens/settings'
+
 
 
 export default function Router() {
@@ -43,6 +45,7 @@ export default function Router() {
                 ),
               }}
             />
+       
         </Tab.Navigator>
   )
 }

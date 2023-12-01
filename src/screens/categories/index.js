@@ -10,29 +10,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const categoryImages = {
+  Objets: require('../../../assets/categorie/objets.jpg'),
   Animaux: require('../../../assets/categorie/animal.jpg'),
   Nourriture: require('../../../assets/categorie/nourriture.jpg'),
   Sport: require('../../../assets/categorie/sport.jpg'),
-  Objets: require('../../../assets/categorie/objets.jpg'),
   Véhicules: require('../../../assets/categorie/vehicule.jpg'),
-  Métiers: require('../../../assets/categorie/metier.jpg'),
   Pays: require('../../../assets/categorie/pays.jpg'),
-  Paysages: require('../../../assets/categorie/paysage.jpg'),
+  Métiers: require('../../../assets/categorie/metier.jpg'),
+  Paysage: require('../../../assets/categorie/paysage.jpg'),
   Couleurs: require('../../../assets/categorie/couleur.jpg'),
   Anatomie: require('../../../assets/categorie/anatomie.jpg'),
 };
 
 const categoryConditions = {
-  Animaux: { sommeRequise: 0, niveauRequis: 1 }, // Débloqué par défaut
-  Nourriture: { sommeRequise: 0, niveauRequis: 1 }, // Débloqué par défaut
-  Sport: { sommeRequise: 50, niveauRequis: 2 },
-  Objets: { sommeRequise: 50, niveauRequis: 2 },
-  Véhicules: { sommeRequise: 100, niveauRequis: 3 },
-  Métiers: { sommeRequise: 100, niveauRequis: 3 },
-  Pays: { sommeRequise: 150, niveauRequis: 4 },
-  Paysages: { sommeRequise: 150, niveauRequis: 4 },
-  Couleurs: { sommeRequise: 200, niveauRequis: 5 },
-  Anatomie: { sommeRequise: 200, niveauRequis: 5 },
+  Objets: { sommeRequise: 0, niveauRequis: 1},
+  Anatomie: { sommeRequise: 200, niveauRequis: 150 },
+  Animaux: { sommeRequise: 500, niveauRequis: 328 },
+  Nourriture: { sommeRequise: 1000, niveauRequis: 450 },
+  Sport: { sommeRequise: 2000, niveauRequis: 636 },
+  Couleurs: { sommeRequise: 2500, niveauRequis: 1000 },
+  Pays: { sommeRequise: 3500, niveauRequis: 1150 },
+  Métiers: { sommeRequise: 5000, niveauRequis: 1400 },
+  Paysage: { sommeRequise: 10000, niveauRequis: 1550 },
+  Véhicules: { sommeRequise: 1200, niveauRequis: 1700 },
 };
 
 export default function CategoryScreen() {
@@ -52,9 +52,6 @@ export default function CategoryScreen() {
         const savedCategories = await AsyncStorage.getItem('categoriesState');
         if (savedCategories) {
           setCategoriesDebloquees(JSON.parse(savedCategories));
-        } else {
-          // Si aucune catégorie n'est enregistrée, initialisez avec les catégories par défaut
-          setCategoriesDebloquees(['Animaux', 'Nourriture']);
         }
       } catch (error) {
         console.error('Error loading categories from AsyncStorage', error);
@@ -64,7 +61,7 @@ export default function CategoryScreen() {
     loadCategoriesFromStorage();
   }, []);
 
-  // Save categories to AsyncStorage whenever it changes
+
   useEffect(() => {
     const saveCategoriesToStorage = async () => {
       try {
@@ -81,40 +78,40 @@ export default function CategoryScreen() {
 
 
 
-  const isCategoryLocked = (category) => {
-    // Vérifier si la catégorie est dans la liste des catégories débloquées
-    const isUnlocked = categoriesDebloquees.includes(category);
-  
-    // Si la catégorie est débloquée, retourner false (non bloquée)
-    if (isUnlocked) {
-      return false;
-    }
-  
-    // Accéder à la condition spécifique de la catégorie
-    const condition = categoryConditions[category];
+const isCategoryLocked = (category) => {
+  // Accéder au niveau requis de la catégorie
+  const niveauRequis = categoryConditions[category]?.niveauRequis;
 
-    // Vérifier les conditions normales de blocage
-    return condition && (jetons < condition.sommeRequise || niveau < condition.niveauRequis);
-  };
-  
+  // Vérifier si le niveau requis est défini et s'il est inférieur au niveau actuel
+  return niveauRequis !== undefined && niveau < niveauRequis;
+};
+
   
 
 
-  const handleCategorySelection = async (category) => {
-    const condition = categoryConditions[category];
-    const sommeRequise = condition ? condition.sommeRequise : 0;
+const handleCategorySelection = async (category) => {
+  // Vérifier si la catégorie est déjà débloquée
+  if (categoriesDebloquees.includes(category)) {
+    // La catégorie est déjà débloquée, naviguer directement vers le jeu
+    navigation.navigate('JEU', { category, categoriesDebloquees });
+  } else {
+    // La catégorie n'est pas encore débloquée
+    const sommeRequise = categoryConditions[category].sommeRequise;
+    const niveauRequis = categoryConditions[category].niveauRequis;
 
-  
-    if (
-      (condition && jetons >= condition.sommeRequise && niveau >= condition.niveauRequis) ||
-      categoriesDebloquees.includes(category)  // Vérifier si la catégorie est déjà débloquée
-    ) {
-      if (!categoriesDebloquees.includes(category)) {
-        // La catégorie n'est pas encore débloquée, demander la confirmation de paiement
+    // Ajoutez une condition pour la catégorie initiale ("Objets")
+    if (category === 'Objets') {
+      // La catégorie initiale ne nécessite pas de paiement
+      setCategoriesDebloquees((prevCategories) => [...prevCategories, category]);
+      navigation.navigate('JEU', { category, categoriesDebloquees });
+    } else {
+      // Vérifier si le niveau est suffisant et si un paiement est nécessaire
+      if (niveau >= niveauRequis && (sommeRequise === 0 || (sommeRequise > 0 && jetons >= sommeRequise))) {
+        // Le solde est suffisant (ou aucun paiement requis), demander la confirmation de paiement
         const confirmationPaiement = await new Promise((resolve) => {
           Alert.alert(
             "Vous devez payer pour débloquer",
-            `Somme requise : ${sommeRequise}`,
+            `Somme requise : ${sommeRequise} jetons`,
             [
               {
                 text: 'Non',
@@ -128,14 +125,15 @@ export default function CategoryScreen() {
             { cancelable: false }
           );
         });
-  
+
         if (confirmationPaiement) {
-          const deblocageReussi = payerPourDebloquer(condition.sommeRequise);
-  
+          // Logique pour le paiement et le déblocage de la catégorie
+          const deblocageReussi = payerPourDebloquer(sommeRequise);
+
           if (deblocageReussi) {
             // Mettre à jour le suivi des catégories débloquées
             setCategoriesDebloquees((prevCategories) => [...prevCategories, category]);
-          
+
             navigation.navigate('JEU', { category, categoriesDebloquees });
           } else {
             Alert.alert(
@@ -147,45 +145,72 @@ export default function CategoryScreen() {
           // L'utilisateur a annulé le paiement
           Alert.alert('Déblocage annulé');
         }
+      }  else if (jetons < sommeRequise) {
+        // Le solde est insuffisant pour débloquer la catégorie
+        Alert.alert(
+          'Solde insuffisant',
+          `Vous n'avez pas la somme requise de ${sommeRequise} jetons pour débloquer cette catégorie.`
+        );
       } else {
-        // La catégorie est déjà débloquée, naviguer directement vers le jeu
-        navigation.navigate('JEU', {category, categoriesDebloquees });
+        // Le solde est insuffisant, le niveau est trop bas, ou aucun paiement requis
+        Alert.alert(
+          translate('categoryLocked'),
+          translate('unlockCondition')
+        );
       }
-    } else {
-      Alert.alert(
-        translate('categoryLocked'),
-        translate('unlockCondition')
-      );
     }
-  };
-  
+  }
+};
 
-  const renderItem = ({ item }) => (
+
+
+
+
+  
+const renderItem = ({ item }) => {
+  const isLocked = isCategoryLocked(item);
+  const categoryTextStyle = isLocked ? lockedTextStyle : styles.categoryText;
+
+  return (
     <TouchableOpacity
-      style={[styles.categoryButton, isCategoryLocked(item) && styles.lockedCategory]}
-      onPress={() => handleCategorySelection(item)}
+      style={[styles.categoryButton, (isLocked || ['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)) && styles.lockedCategory]}
+      onPress={() => !['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item) && handleCategorySelection(item)}
+      disabled={['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)}
     >
       <ImageBackground
         source={categoryImages[item]}
         style={styles.imageBackground}
       >
-        {isCategoryLocked(item) && (
-          <View style={styles.lockedOverlay}>
-            <Image
-              source={require('../../../assets/categorie/cadenas.png')}
-              style={styles.lockedImage}
-            />
-          </View>
-        )}
+        <View>
+          {isLocked && (
+            <View style={styles.lockedOverlay}>
+              <Image
+                source={require('../../../assets/categorie/cadenas.png')}
+                style={styles.lockedImage}
+              />
+             
+              <Text style={lockedTextStyle}>
+                {['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)
+                  ? 'Bientôt disponible'
+                  : `Niveau requis: ${categoryConditions[item]?.niveauRequis || 'Non spécifié'}`
+                }
+              </Text>
+            </View>
+          )}
+        </View>
         <Text style={styles.categoryText}>{item}</Text>
       </ImageBackground>
     </TouchableOpacity>
   );
-  
+};
+
+
+
   
 
   const containerStyle = darkMode ? styles.darkContainer : styles.container;
   const titleStyle = darkMode ? styles.darkTitle : styles.title;
+  const lockedTextStyle = darkMode ? styles.darkLockedText : styles.lockedText;
 
   return (
     <View style={containerStyle}>

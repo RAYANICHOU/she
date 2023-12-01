@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("fr");
   const availableLanguages = ["fr", "en"];
 
