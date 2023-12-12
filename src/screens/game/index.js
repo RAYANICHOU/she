@@ -2,6 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Alert, Animated, Text, TouchableOpacity, TouchableWithoutFeedback, Vibration, View } from 'react-native';
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+
 import { Card } from 'react-native-elements';
 import { motsBibliotheque } from '../../../assets/data/mots';
 import { useGame } from '../../context/GameContexte';
@@ -15,6 +17,9 @@ import { styles } from './style';
 
 
 
+const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest('ca-app-pub-7121868822906443/6158913342', {
+  requestNonPersonalizedAdsOnly: true
+});
 
 
 
@@ -25,9 +30,6 @@ export default function GameScreen() {
   const { translate } = useLanguage();
   const [motsRestants, setMotsRestants] = useState([...motsBibliotheque]);
   const [consecutiveCorrectGuesses, setConsecutiveCorrectGuesses] = useState(0);
-
-
- 
   const [essaisRestants, setEssaisRestants] = useState(maxEssaisParMot);
   const [lettresMotEnCours, setLettresMotEnCours] = useState([]);
   const [totalJetonsGagnes, setTotalJetonsGagnes] = useState(0);
@@ -38,14 +40,55 @@ export default function GameScreen() {
   const [lettresIncorrectes, setLettresIncorrectes] = useState([]);
   const [lettreAgrandie, setLettreAgrandie] = useState(null);
 
- 
-
-const [showBonusMessage, setShowBonusMessage] = useState(false);
-  
+  const [showBonusMessage, setShowBonusMessage] = useState(false);
   const { jetons, niveau, updateJetons, updateNiveau, motEnCours, updateMotEnCours } = useGame();
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [showSuper, setShowSuper] = useState(false);
   const [showLearnt, setShowLearnt] = useState(false);
+  const [rewardedInterstitialLoaded, setRewardedInterstitialLoaded] = useState(false);
+
+  const loadRewardedInterstitial = () => {
+    const unsubscribeLoaded = rewardedInterstitial.addAdEventListener(
+      RewardedAdEventType.LOADED,
+      () => {
+        setRewardedInterstitialLoaded(true);
+      }
+    );
+
+    const unsubscribeEarned = rewardedInterstitial.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        console.log(`User earned reward of ${reward.amount} ${reward.type}`);
+      }
+    );
+
+    const unsubscribeClosed = rewardedInterstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        setRewardedInterstitialLoaded(false);
+        rewardedInterstitial.load();
+      }
+    );
+
+    rewardedInterstitial.load();
+
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeClosed();
+      unsubscribeEarned();
+    }
+  };
+
+  
+  
+
+
+
+
+
+
+
+
 
 
   const containerStyle = darkMode ? styles.darkContainer : styles.container;
@@ -74,7 +117,7 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
 
 
   const startTokenInterval = () => {
-    const intervalDuration = 3 * 60 * 1000; // 3 minutes
+    const intervalDuration = 5 * 60 * 1000; // 3 minutes
   
     const updateTokens = async () => {
       try {
@@ -124,8 +167,6 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
           const savedState = JSON.parse(savedStateJSON);
     
           setMotsRestants(savedState.motsRestants);
-
-         
           
         } else {
           if (savedCategory) {
@@ -236,12 +277,10 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
     const motsParNiveauActuel = motsFiltres.filter((mot) => mot.niveau === niveau);
   
     if (!motsParNiveauActuel.length) {
-      // Si aucun mot n'est trouvé pour le niveau actuel, choisissez le premier disponible
       const premierMot = motsFiltres[0];
       updateMotEnCours(premierMot.mot);
       setIndiceMotEnCours(premierMot.indice);
     } else {
-      // Choisissez aléatoirement parmi les mots filtrés par niveau
       const indexMotAleatoire = Math.floor(Math.random() * motsParNiveauActuel.length);
       const nouveauMotObj = motsParNiveauActuel[indexMotAleatoire];
       updateMotEnCours(nouveauMotObj.mot);
@@ -256,25 +295,6 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
   };
   
   
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   useEffect(() => {
     const motsFiltres = motsBibliotheque.filter(
@@ -331,74 +351,6 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
     setClignotement(false);
   };
   
-
-
-
-  const verifierLettre = (lettre) => {
-    const penalite = 20;
-    const lettreEntre = lettre.toUpperCase();
-  
-    if (jetons < 40) {
-
-      Alert.alert(
-        translate('notEnoughTokens'),
-        translate('notEnoughTokensToTryLetter'),
-        [
-          {
-            text: translate('watchAd'),
-            onPress: () => {
-              regarderPub();
-            },
-          },
-          {
-            text: translate('wait'),
-          },
-        ],
-        { cancelable: true }
-      );
-      return;
-    }
-  
-    if (motEnCours && motEnCours.toUpperCase().includes(lettreEntre)) {
-      if (!lettresMotEnCours.includes(lettreEntre)) {
-        setLettresMotEnCours([...lettresMotEnCours, lettreEntre]);
-        setLettresCorrectes([...lettresCorrectes, lettreEntre]);
-  
-        if (lettresMotEnCours.join('') === motEnCours.toUpperCase()) {
-          const jetonsGagnes = 40;
-          setTotalJetonsGagnes(totalJetonsGagnes + jetonsGagnes);
-          passerAEtapeSuivante();
-        }
-      }
-    } else {
-      if (!lettresIncorrectes.includes(lettreEntre)) {
-        Vibration.vibrate(500);
-        const nouveauxEssaisRestants = essaisRestants - 1;
-  
-        if (nouveauxEssaisRestants === 0) {
-          // Si le mot est incorrect, retirer 30 jetons
-          const penaliteJetons = 30;
-          updateJetons(jetons - penaliteJetons);
-  
-          Alert.alert(
-            translate('incorrectWord'),
-            `${translate('theWordWas')}: '${motEnCours}'. ${translate('youLost')}.`
-          );
-  
-          choisirMotAleatoire();
-        } else {
-          setEssaisRestants(nouveauxEssaisRestants);
-          setLettresIncorrectes([...lettresIncorrectes, lettreEntre]);
-        }
-      }
-    }
-  };
-  
-  
-  
-  
-  
-  
   
 
   useEffect(() => {
@@ -413,26 +365,6 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
       }, 100);
     }
   }, [lettresMotEnCours]);
-
-
- 
-  
-    
-  
-
-  const regarderPub = async () => {
-  
-    
-          //updateJetons((prevJetons) => prevJetons + 100);
-          //setPubVue(false);
-          Alert.alert(translate('available'));
-        }
-
-      
-  
- 
-  
-  
 
   const toutesLesLettresCorrectes = () => {
 
@@ -566,50 +498,131 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
     }, 300);
   };
 
+  
+  const regarderPub = async () => {
+    await loadRewardedInterstitial();
+
+    const unsubscribeEarned = rewardedInterstitial.addAdEventListener(
+      RewardedAdEventType.EARNED_REWARD,
+      reward => {
+        const nouveauxJetons = jetons + 100;
+        updateJetons(nouveauxJetons);
+        Alert.alert(translate('rewardEarned'));
+        unsubscribeEarned();
+        unsubscribeClosed();
+      }
+    );
+
+    const unsubscribeClosed = rewardedInterstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        unsubscribeEarned();
+        unsubscribeClosed();
+      }
+    );
+
+    if (rewardedInterstitialLoaded) {
+      rewardedInterstitial.show();
+    } else {
+      console.log("La publicité récompensée n'est pas encore chargée.");
+    }
+  };
 
 
   const passerMot = async () => {
-    Alert.alert(
-      translate('skipWordConfirmation'),
-      translate('skipWordConfirmationMessage'),
-      [
-        {
-          text: translate('payTokens'),
-          onPress: async () => {
-            if (jetons >= 40) {
-              await updateJetons(jetons - 40);
-              updateNiveau(niveau + 1); 
-            
-              
-              setEssaisRestants(maxEssaisParMot);
-              setLettresMotEnCours([]);
-              setLettresIncorrectes([]);
-            } else {
-              Alert.alert(
-                translate('notEnoughTokensToSkipWord')
-              );
-            }
-          },
+  Alert.alert(
+    translate('skipWordConfirmation'),
+    translate('skipWordConfirmationMessage'),
+    [
+      {
+        text: translate('payTokens'),
+        onPress: async () => {
+          if (jetons >= 60) {
+            await updateJetons(jetons - 60);
+            updateNiveau(niveau + 1);
+            setEssaisRestants(maxEssaisParMot);
+            setLettresMotEnCours([]);
+            setLettresIncorrectes([]);
+          } else {
+            Alert.alert(
+              translate('notEnoughTokensToSkipWord')
+            );
+          }
         },
+      },
+      {
+        text: translate('watchAd'),
+        onPress: regarderPub,
+      },
+    ],
+    { cancelable: true }
+  );
+};
+
+
+
+
+const verifierLettre = (lettre) => {
+  const penalite = 20;
+  const lettreEntre = lettre.toUpperCase();
+
+  if (jetons < 40) {
+
+    Alert.alert(
+      translate('notEnoughTokens'),
+      translate('notEnoughTokensToTryLetter'),
+      [
         {
           text: translate('watchAd'),
           onPress: () => {
             regarderPub();
-            //fonction pour regarder une pub ici
-            // Exemple : regarderPub();
           },
+        },
+        {
+          text: translate('wait'),
         },
       ],
       { cancelable: true }
     );
-  };
+    return;
+  }
+
+  if (motEnCours && motEnCours.toUpperCase().includes(lettreEntre)) {
+    if (!lettresMotEnCours.includes(lettreEntre)) {
+      setLettresMotEnCours([...lettresMotEnCours, lettreEntre]);
+      setLettresCorrectes([...lettresCorrectes, lettreEntre]);
+
+      if (lettresMotEnCours.join('') === motEnCours.toUpperCase()) {
+        const jetonsGagnes = 40;
+        setTotalJetonsGagnes(totalJetonsGagnes + jetonsGagnes);
+        passerAEtapeSuivante();
+      }
+    }
+  } else {
+    if (!lettresIncorrectes.includes(lettreEntre)) {
+      Vibration.vibrate(500);
+      const nouveauxEssaisRestants = essaisRestants - 1;
+
+      if (nouveauxEssaisRestants === 0) {
+        // Si le mot est incorrect, retirer 40 jetons
+        const penaliteJetons = 40;
+        updateJetons(jetons - penaliteJetons);
+
+        Alert.alert(
+          translate('incorrectWord'),
+          `${translate('theWordWas')}: '${motEnCours}'. ${translate('youLost')}.`
+        );
+
+        choisirMotAleatoire();
+      } else {
+        setEssaisRestants(nouveauxEssaisRestants);
+        setLettresIncorrectes([...lettresIncorrectes, lettreEntre]);
+      }
+    }
+  }
+};
+
   
-
-
-
-
-
-
   return selectedCategory ? (
     <View style={containerStyle}>
       {selectedCategory && (
@@ -623,7 +636,7 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
       </View>
       <View style={styles.bonusMessageContainer}>
         {showBonusMessage && (
-          <Animated.Text style={styles.bonusMessage}>+20 jetons (chaque 3 minutes)</Animated.Text>
+          <Animated.Text style={styles.bonusMessage}>+20 jetons (chaque 5 minutes)</Animated.Text>
         )}
       </View>
       <Text style={indiceTextStyle}>Niveau: {niveau}</Text>
@@ -660,10 +673,10 @@ const [showBonusMessage, setShowBonusMessage] = useState(false);
         <TouchableOpacity
           style={regarderPubButtonStyle}
           onPress={passerMot}
-       
         >
           <Text style={styles.buttonText}>{translate('skipWord')}</Text>
 </TouchableOpacity>
+
 
       </View>
     </View>

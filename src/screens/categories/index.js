@@ -7,6 +7,8 @@ import { useLanguage } from '../../context/LangageContexte';
 import styles from './style';
 import { useGame } from '../../context/GameContexte';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+
 
 
 const categoryImages = {
@@ -99,60 +101,62 @@ const handleCategorySelection = async (category) => {
     const sommeRequise = categoryConditions[category].sommeRequise;
     const niveauRequis = categoryConditions[category].niveauRequis;
 
-    // Ajoutez une condition pour la catégorie initiale ("Objets")
     if (category === 'Objets') {
       // La catégorie initiale ne nécessite pas de paiement
       setCategoriesDebloquees((prevCategories) => [...prevCategories, category]);
       navigation.navigate('JEU', { category, categoriesDebloquees });
     } else {
       // Vérifier si le niveau est suffisant et si un paiement est nécessaire
-      if (niveau >= niveauRequis && (sommeRequise === 0 || (sommeRequise > 0 && jetons >= sommeRequise))) {
-        // Le solde est suffisant (ou aucun paiement requis), demander la confirmation de paiement
-        const confirmationPaiement = await new Promise((resolve) => {
-          Alert.alert(
-            "Vous devez payer pour débloquer",
-            `Somme requise : ${sommeRequise} jetons`,
-            [
-              {
-                text: 'Non',
-                style: 'cancel',
-              },
-              {
-                text: 'Oui',
-                onPress: () => resolve(true),
-              },
-            ],
-            { cancelable: false }
-          );
-        });
-
-        if (confirmationPaiement) {
-          // Logique pour le paiement et le déblocage de la catégorie
-          const deblocageReussi = payerPourDebloquer(sommeRequise);
-
-          if (deblocageReussi) {
-            // Mettre à jour le suivi des catégories débloquées
-            setCategoriesDebloquees((prevCategories) => [...prevCategories, category]);
-
-            navigation.navigate('JEU', { category, categoriesDebloquees });
-          } else {
+      if (niveau >= niveauRequis) {
+        // Le niveau est suffisant, vérifier les jetons
+        if (sommeRequise === 0 || (sommeRequise > 0 && jetons >= sommeRequise)) {
+          // Le solde est suffisant (ou aucun paiement requis), demander la confirmation de paiement
+          const confirmationPaiement = await new Promise((resolve) => {
             Alert.alert(
-              translate('notEnoughTokens'),
-              translate('notEnoughTokensToUnlockCategory')
+              "Vous devez payer pour débloquer",
+              `Somme requise : ${sommeRequise} jetons`,
+              [
+                {
+                  text: 'Non',
+                  style: 'cancel',
+                },
+                {
+                  text: 'Oui',
+                  onPress: () => resolve(true),
+                },
+              ],
+              { cancelable: false }
             );
+          });
+
+          if (confirmationPaiement) {
+            // Logique pour le paiement et le déblocage de la catégorie
+            const deblocageReussi = payerPourDebloquer(sommeRequise);
+
+            if (deblocageReussi) {
+              // Mettre à jour le suivi des catégories débloquées
+              setCategoriesDebloquees((prevCategories) => [...prevCategories, category]);
+
+              navigation.navigate('JEU', { category, categoriesDebloquees });
+            } else {
+              Alert.alert(
+                translate('notEnoughTokens'),
+                translate('notEnoughTokensToUnlockCategory')
+              );
+            }
+          } else {
+            // L'utilisateur a annulé le paiement
+            Alert.alert('Déblocage annulé');
           }
         } else {
-          // L'utilisateur a annulé le paiement
-          Alert.alert('Déblocage annulé');
+          // Le solde est insuffisant pour débloquer la catégorie
+          Alert.alert(
+            'Solde insuffisant',
+            `Vous n'avez pas la somme requise de ${sommeRequise} jetons pour débloquer cette catégorie.`
+          );
         }
-      }  else if (jetons < sommeRequise) {
-        // Le solde est insuffisant pour débloquer la catégorie
-        Alert.alert(
-          'Solde insuffisant',
-          `Vous n'avez pas la somme requise de ${sommeRequise} jetons pour débloquer cette catégorie.`
-        );
       } else {
-        // Le solde est insuffisant, le niveau est trop bas, ou aucun paiement requis
+        // Le niveau est trop bas
         Alert.alert(
           translate('categoryLocked'),
           translate('unlockCondition')
@@ -188,7 +192,6 @@ const renderItem = ({ item }) => {
                 source={require('../../../assets/categorie/cadenas.png')}
                 style={styles.lockedImage}
               />
-             
               <Text style={lockedTextStyle}>
                 {['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)
                   ? 'Bientôt disponible'
@@ -214,6 +217,13 @@ const renderItem = ({ item }) => {
 
   return (
     <View style={containerStyle}>
+       <BannerAd 
+        unitId="ca-app-pub-7121868822906443/6151212477"
+        size={BannerAdSize.LARGE_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true
+        }}
+      />
       <Text style={titleStyle}>{translate('select')}</Text>
       <FlatList
         data={categories}

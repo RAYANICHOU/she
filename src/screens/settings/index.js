@@ -12,6 +12,7 @@ import { useTheme } from "../../context/ThemeContexte";
 import { useLanguage } from "../../context/LangageContexte";
 import styles from "./style";
 import { Linking } from "react-native";
+import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
 
 
 
@@ -129,6 +130,14 @@ export default function SettingScreen() {
   <TouchableOpacity onPress={openWebPage} style={optionStyle}>
     <Text style={optionTextDark}>{translate('ameliorate')}</Text>
   </TouchableOpacity>
+
+  <BannerAd
+        unitId="ca-app-pub-7121868822906443/6151212477"
+        size={BannerAdSize.LARGE_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true
+        }}
+      />
 </View>
 
 
