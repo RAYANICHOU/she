@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Lea",
+    "slug": "project-lea",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/lea2.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.leacode.projectlea"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/lea2.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.leacode.projectlea"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e89b6aa6-dced-47dc-9c87-8b5cf70796ee"
+      }
+    }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-9840961515933669~6026267582"
+  }
+}
