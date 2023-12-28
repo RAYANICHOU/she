@@ -77,6 +77,12 @@ export default function SettingScreen() {
     setLanguage(language);
   };
 
+  const openLink = () => {
+    const url = "https://chat.whatsapp.com/L7y1vp8Z9N8Flzj33CZwUL";
+    Linking.openURL(url).catch((err) =>
+    console.error("Impossible d'ouvrir l'URL", err)
+  );
+  }
 
   
   const openWebPage = () => {
@@ -129,6 +135,10 @@ export default function SettingScreen() {
       <View style={sectionStyle}>
   <TouchableOpacity onPress={openWebPage} style={optionStyle}>
     <Text style={optionTextDark}>{translate('ameliorate')}</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity onPress={openLink} style = {optionStyle}>
+  <Text style={optionTextDark}>{translate('integrate')}</Text>
   </TouchableOpacity>
 
   <BannerAd

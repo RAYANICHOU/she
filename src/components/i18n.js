@@ -56,7 +56,8 @@ export const translations = {
     skipWordConfirmationMessage: "Payez pour passer ou regardez une pub afin d'avoir des jetons pour passer ",
     wait: "Attendre",
     notEnoughTokensToTryLetter: "Vous devez avoir au moins 30 jetons pour jouer",
-    rewardsReceived: "Récompense Obtenue"
+    rewardsReceived: "Récompense Obtenue",
+    integrate: "DEFIEZ LES MEILLEURS"
   },
   en: {
     appTitle: "L  E  A",
@@ -112,5 +113,6 @@ export const translations = {
     wait: "Wait",
 
     rewardsReceived: "Rewards received",
+    integrate: "CHALLENGE THE BEST"
   },
 };
