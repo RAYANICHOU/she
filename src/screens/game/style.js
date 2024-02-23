@@ -45,10 +45,10 @@ export const styles = StyleSheet.create({
     padding: RFValue(20),
     alignItems: 'center',
     borderRadius: RFValue(15),
-    borderWidth: RFValue(2),
+    borderWidth: RFValue(1),
     borderColor: '#1E7FCB',
     backgroundColor: "#F1EBE0",
-    elevation: 5,
+    elevation: 1,
   },
   darkCard: {
     width: '90%',
@@ -58,7 +58,6 @@ export const styles = StyleSheet.create({
     borderWidth: RFValue(1),
     borderColor: '#363535',
     backgroundColor: 'transparent',
-    elevation: 5,
   },
   indiceText: {
     fontSize: RFValue(15),
@@ -191,6 +190,12 @@ export const styles = StyleSheet.create({
     marginTop: RFValue(10),
     marginHorizontal: RFValue(20),
   },
+
+  bonusImage: {
+    width: RFValue(40),
+    height: RFValue(40),
+  },
+
   regarderPubButton: {
     backgroundColor: colors.accent,
     padding: RFValue(10),
@@ -227,25 +232,27 @@ export const styles = StyleSheet.create({
   chooseCategoryButtonText: {
     color: 'white',
     textAlign: 'center',
-   
     
   },
   bonusMessage: {
     fontSize: RFValue(16),
-    color: 'green', 
+    color: 'green',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: RFValue(10), 
-    padding: RFValue(10), 
-    backgroundColor: 'lightyellow', 
-    borderRadius:RFValue(8),
+    marginTop: RFValue(10),
+    padding: RFValue(10),
+    backgroundColor: 'lightyellow',
+    borderRadius:RFValue(8)
   },
   congratulationsMessage: {
-    fontSize: RFValue(18), 
+    fontSize: RFValue(18),
     color: 'green',
-    marginTop: RFValue(20), 
+    marginTop: RFValue(20),
     backgroundColor: 'white',
     borderRadius:RFValue(20),
     padding: RFValue(10),
   },
+
+
+
 });

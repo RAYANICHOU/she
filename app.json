@@ -6,7 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/lea2.png",
     "splash": {
-      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -26,7 +25,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "f4c017b4-6e5a-4d22-8826-e49b59b854fc"
+        "projectId": "e89b6aa6-dced-47dc-9c87-8b5cf70796ee"
       }
     }
   },

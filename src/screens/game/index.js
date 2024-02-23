@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Alert, Animated, Text, TouchableOpacity, TouchableWithoutFeedback, Vibration, View } from 'react-native';
-import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedInterstitialAd, RewardedAdEventType } from 'react-native-google-mobile-ads';
+import { AdEventType, RewardedAdEventType, RewardedInterstitialAd } from 'react-native-google-mobile-ads';
 
 import { Card } from 'react-native-elements';
 import { motsBibliotheque } from '../../../assets/data/mots';
@@ -11,10 +11,6 @@ import { useLanguage } from '../../context/LangageContexte';
 import { useTheme } from '../../context/ThemeContexte';
 import { lettresClavier } from '../../utils/lettres';
 import { styles } from './style';
-
-
-
-
 
 
 const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest('ca-app-pub-9840961515933669/4969992741', {
@@ -26,6 +22,7 @@ const rewardedInterstitial = RewardedInterstitialAd.createForAdRequest('ca-app-p
 const maxEssaisParMot = 4 ;
 
 export default function GameScreen() {
+
   const { darkMode } = useTheme();
   const { translate } = useLanguage();
   const [motsRestants, setMotsRestants] = useState([...motsBibliotheque]);
@@ -39,6 +36,8 @@ export default function GameScreen() {
   const [lettresCorrectes, setLettresCorrectes] = useState ([]);
   const [lettresIncorrectes, setLettresIncorrectes] = useState([]);
   const [lettreAgrandie, setLettreAgrandie] = useState(null);
+  const [lettresPosition, setLettresPosition] = useState([...lettresClavier]);
+
 
   const [showBonusMessage, setShowBonusMessage] = useState(false);
   const { jetons, niveau, updateJetons, updateNiveau, motEnCours, updateMotEnCours } = useGame();
@@ -110,6 +109,8 @@ export default function GameScreen() {
   const route = useRoute();
   const selectedCategory = route.params?.category;
   const categoriesDebloquees = route.params?.categoriesDebloquees || [];
+
+
 
 
 
@@ -224,6 +225,26 @@ export default function GameScreen() {
 
 
 
+
+
+
+
+
+
+
+
+
+  const redistribuerLettres = () => {
+    const lettresMelangees = lettresClavier.sort(() => Math.random() - 0.5);
+    setLettresPosition([...lettresMelangees]);
+  };
+
+  useEffect (()=>{
+    redistribuerLettres();
+  }, [motEnCours]);
+  
+
+
   const obtenirLettreBonus = async () => {
     const coutLettreBonus = 20;
     
@@ -258,11 +279,12 @@ export default function GameScreen() {
   };
   
 
+  
+
 
 
 
   const initialiserJeuAvecCategorie = (category) => {
-    // Utiliser motsBibliotheque pour obtenir les mots de la catégorie spécifiée
     const motsFiltres = motsBibliotheque.filter(
       (mot) => mot.catégorie === category && mot.niveau === niveau
     );
@@ -273,7 +295,6 @@ export default function GameScreen() {
       return;
     }
   
-    // Filtrer les mots par niveau actuel
     const motsParNiveauActuel = motsFiltres.filter((mot) => mot.niveau === niveau);
   
     if (!motsParNiveauActuel.length) {
@@ -340,7 +361,10 @@ export default function GameScreen() {
     const nouveauMotObj = motsFiltres[indexMotAleatoire];
     const nouveauMot = nouveauMotObj.mot;
     const indiceDuMot = nouveauMotObj.indice;
-  
+
+
+
+    redistribuerLettres();
     updateMotEnCours(nouveauMot);
     setIndiceMotEnCours(indiceDuMot);
     
@@ -348,6 +372,7 @@ export default function GameScreen() {
     setMotsRestants(motsFiltres.filter((mot) => mot !== nouveauMotObj));
     setLettresMotEnCours([]);
     setLettresIncorrectes([]);
+    
     setClignotement(false);
   };
   
@@ -381,7 +406,7 @@ export default function GameScreen() {
 
   const passerAEtapeSuivante = async () => {
     if (motEnCours && toutesLesLettresCorrectes()) {
-      const jetonsGagnes = 30;
+      const jetonsGagnes = 20;
       const nouveauNombreJetons = jetons + jetonsGagnes;
      
       await updateJetons(nouveauNombreJetons);
@@ -425,7 +450,7 @@ export default function GameScreen() {
   
   
 
-  const renderMotEnCours = () => {
+   const renderMotEnCours = () => {
   if (!motEnCours) return null;
    
   const motEnMajuscules = motEnCours.toUpperCase();
@@ -452,13 +477,15 @@ export default function GameScreen() {
 
   return <View style={styles.motEnCoursContainer}>{cases}</View>;
 };
+  
+ 
 
   
 
   const renderClavier = () => {
     return (
       <View style={clavierStyle}>
-        {lettresClavier.map((lettre) => (
+        {lettresPosition.map((lettre) => (
           <TouchableWithoutFeedback
             key={lettre}
             onPress={() => verifierLettre(lettre)}
@@ -675,10 +702,11 @@ const verifierLettre = (lettre) => {
           onPress={passerMot}
         >
           <Text style={styles.buttonText}>{translate('skipWord')}</Text>
-</TouchableOpacity>
+        </TouchableOpacity>
 
 
       </View>
+    
     </View>
   ) : (
     <View style={containerStyle}>

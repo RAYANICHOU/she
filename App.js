@@ -5,12 +5,14 @@ import { GameProvider } from './src/context/GameContexte';
 import { LanguageProvider } from './src/context/LangageContexte';
 import { ThemeProvider } from './src/context/ThemeContexte';
 
-
+import {PermissionsAndroid} from 'react-native';
+PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
 
 
 
 export default function App() {
   
+
   return (
     <ThemeProvider>
       <GameProvider>
@@ -20,7 +22,8 @@ export default function App() {
         </NavigationContainer>
       </LanguageProvider>
       </GameProvider>
-
     </ThemeProvider>
   )
+
+
 }

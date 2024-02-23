@@ -12,6 +12,8 @@ import { BannerAd, BannerAdSize, TestIds, InterstitialAd, AdEventType, RewardedI
 
 
 const categoryImages = {
+  nouchi: require('../../../assets/categorie/nouchi.jpg'),
+  CAN: require('../../../assets/categorie/logocan.jpeg'),
   Objets: require('../../../assets/categorie/objets.jpg'),
   Animaux: require('../../../assets/categorie/animal.jpg'),
   Nourriture: require('../../../assets/categorie/nourriture.jpg'),
@@ -26,6 +28,8 @@ const categoryImages = {
 };
 
 const categoryConditions = {
+  nouchi: {sommeRequise: 0, niveauRequis: 1},
+  CAN: {sommeRequise: 0, niveauRequis: 1},
   Objets: { sommeRequise: 0, niveauRequis: 1},
   Anatomie: { sommeRequise: 200, niveauRequis: 150 },
   Animaux: { sommeRequise: 500, niveauRequis: 328 },
@@ -46,9 +50,6 @@ export default function CategoryScreen() {
   const categories = Array.from(new Set(motsBibliotheque.map((mot) => mot.catégorie)));
 
   const [categoriesDebloquees, setCategoriesDebloquees] = useState([]);
-
-  
-
 
   useEffect(() => {
     const loadCategoriesFromStorage = async () => {
@@ -83,10 +84,8 @@ export default function CategoryScreen() {
 
 
 const isCategoryLocked = (category) => {
-  // Accéder au niveau requis de la catégorie
   const niveauRequis = categoryConditions[category]?.niveauRequis;
 
-  // Vérifier si le niveau requis est défini et s'il est inférieur au niveau actuel
   return niveauRequis !== undefined && niveau < niveauRequis;
 };
 
@@ -100,7 +99,7 @@ const handleCategorySelection = async (category) => {
     const sommeRequise = categoryConditions[category].sommeRequise;
     const niveauRequis = categoryConditions[category].niveauRequis;
 
-    if (category === 'Objets') {
+    if (category === 'Objets' || category === 'CAN' ) {
       setCategoriesDebloquees((prevCategories) => [...prevCategories, category]);
       navigation.navigate('JEU', { category, categoriesDebloquees });
     } else {
@@ -129,7 +128,6 @@ const handleCategorySelection = async (category) => {
             const deblocageReussi = payerPourDebloquer(sommeRequise);
 
             if (deblocageReussi) {
-              // Mettre à jour le suivi des catégories débloquées
               setCategoriesDebloquees((prevCategories) => [...prevCategories, category]);
 
               navigation.navigate('JEU', { category, categoriesDebloquees });
@@ -173,9 +171,9 @@ const renderItem = ({ item }) => {
 
   return (
     <TouchableOpacity
-      style={[styles.categoryButton, (isLocked || ['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)) && styles.lockedCategory]}
-      onPress={() => !['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item) && handleCategorySelection(item)}
-      disabled={['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)}
+      style={[styles.categoryButton, (isLocked || ['Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)) && styles.lockedCategory]}
+      onPress={() => !['Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item) && handleCategorySelection(item)}
+      disabled={['Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)}
     >
       <ImageBackground
         source={categoryImages[item]}
@@ -189,7 +187,7 @@ const renderItem = ({ item }) => {
                 style={styles.lockedImage}
               />
               <Text style={lockedTextStyle}>
-                {['Sport','Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)
+                {['Couleurs','Véhicules', 'Paysage', 'Métiers', 'Pays'].includes(item)
                   ? 'Bientôt disponible'
                   : `Niveau requis: ${categoryConditions[item]?.niveauRequis || 'Non spécifié'}`
                 }
@@ -213,7 +211,7 @@ const renderItem = ({ item }) => {
 
   return (
     <View style={containerStyle}>
-       <BannerAd 
+       <BannerAd
         unitId="ca-app-pub-9840961515933669/6649867933"
         size={BannerAdSize.LARGE_BANNER}
         requestOptions={{

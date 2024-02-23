@@ -4,6 +4,90 @@
 export const motsBibliotheque = [
 
 
+//Catégorie Nouchi
+{mot: "NOUCHI", indice: "Langue vernaculaire ivoirienne", catégorie: "nouchi", niveau: 1},
+{mot: "GBO", indice: "Personne musclée", catégorie: "nouchi", niveau: 2},
+{mot: "MOUMENT", indice: "Deux tons, trois ....", catégorie: "nouchi", niveau: 3},
+{mot: "PEHISOEUR", indice: "Petite soeur ", catégorie: "nouchi", niveau: 4},
+{mot: "GRIGRA", indice: "Chercher", catégorie: "nouchi", niveau: 5}, 
+{mot: "BEOU", indice: "Fuir", catégorie: "nouchi", niveau: 6},
+{mot: "GROUILLER", indice: "se battre, se chercher", catégorie: "nouchi", niveau: 7},
+{mot: "KOUMAN", indice: "parler", catégorie: "nouchi", niveau: 8},
+{mot: "PO", indice: "s'asseoir, se moquer", catégorie: "nouchi", niveau: 9},
+{mot: "DRA", indice: "savoir, avoir connaissance", catégorie: "nouchi", niveau: 10},
+{mot: "MOU", indice: "se calmer", catégorie: "nouchi", niveau: 11},
+{mot: "CHAP", indice: "Aller vite vite", catégorie: "nouchi", niveau: 12},
+{mot: "DJAI", indice: "L'argent", catégorie: "nouchi", niveau: 13},
+{mot: "YOUGOUYAGA", indice: "Déposer", catégorie: "nouchi", niveau: 14},
+{mot: "CHAKOROMAN", indice: "ça marcche un peu en bas", catégorie: "nouchi", niveau: 15},
+{mot: "YABA", indice: "Salutation traditionnelle en nouchi", catégorie: "nouchi", niveau: 16},
+{mot: "GBANGBAN", indice: "Il y a de la tension en l'air", catégorie: "nouchi", niveau: 17},
+{mot: "RAMBA", indice: "Problème", catégorie: "nouchi", niveau: 18},
+{mot: "ZANGBETO", indice: "Esprit protecteur vaudou en Afrique de l'Ouest", catégorie: "nouchi", niveau: 19},
+{mot: "KPAKPA", indice: "Petit oiseau coloré d'Afrique de l'Ouest", catégorie: "nouchi", niveau: 20},
+{mot: "ZO", indice:"Quand c'est bon, c'est que c'est ..", catégorie: "nouchi", niveau: 21},
+{mot: "KEN", indice: "Quelque chose", catégorie: "nouchi", niveau: 22},
+{mot: "GBOLOR", indice: "Fatiguer", catégorie: "nouchi", niveau: 23},
+{mot: "WORO", indice: "Fatiguer aussi", catégorie: "nouchi",  niveau: 24},
+{mot: "GBEVE", indice: "Bouche en nouchi", catégorie: "nouchi", niveau: 25},
+{mot: "ZOKORLI", indice: "autre nom de bouche en nouchi", catégorie: "nouchi", niveau: 26},
+{mot: "Sciencer", indice: "S'il te plait, pardon", catégorie: "nouchi", niveau: 27}, 
+{mot: "Barra", indice: "Travailler, il faut travailler eh", catégorie: "nouchi", niveau: 28},
+{mot: "yougou", indice: "friperie", catégorie: "nouchi", niveau: 29},
+{mot: "pixe", indice: "maison", catégorie: "nouchi", niveau: 30}, 
+{mot: "noussi", indice: "une personnne qui parle nouchi est un", catégorie: "nouchi", niveau: 31},
+
+
+//Catégorie Spéciale CAN:
+
+
+{mot: "DROGBA", indice: "Légende du Football ivoirien ! ", catégorie: "CAN", niveau: 1},
+{mot: "POKOU", indice: "Ballon de la CAN 2023", catégorie: "CAN", niveau: 2},
+{mot: "HOTE", indice: "celui qui accueille le tournoi", catégorie: "CAN", niveau: 3 },
+{mot: "TERANGA", indice: "D'où viennent les lions du Sénégal", catégorie: "CAN", niveau: 4},
+{mot: "PHARAONS", indice: "Les rois incontestés d'Égypte", catégorie: "CAN", niveau: 5},
+{mot: "FENNEC", indice: "Les petits renards d'Algérie", catégorie: "CAN", niveau: 6},
+{mot: "ELEPHANTS", indice: "L'emblème des vainqueurs !", catégorie: "CAN", niveau: 7},
+{mot: "CROCRODILE", indice: "Les gros reptiles du Lesotho", catégorie: "CAN", niveau: 8},
+{mot: "EBIMPE", indice: "Lieu de la finale de la CAN 2023", catégorie: "CAN", niveau: 9},
+{mot: "CAMEROUN", indice: "Le continent !", catégorie: "CAN", niveau: 10},
+{mot: "SELECTION", indice: "Équipe nationale", catégorie: "CAN", niveau: 11},
+{mot: "QUALIFIER", indice: "Être sélectionné pour un tournoi", catégorie: "CAN", niveau: 12},
+{mot: "STADE", indice: "Lieu des matchs", catégorie: "CAN", niveau: 13},
+{mot: "FINALE", indice: "Dernier match de la compétition", catégorie: "CAN", niveau: 14},
+{mot: "PENALTY", indice: "Seul face au gardien ! ", catégorie: "CAN", niveau: 15},
+{mot: "ARBITRE", indice: "Personne chargée de faire respecter les règles", catégorie: "CAN", niveau: 16},
+{mot: "BUT", indice: "Tout le monde veut en marquer", catégorie: "CAN", niveau: 17},
+{mot: "EXCLUSION", indice: "Le carton rouge conduit à une ..", catégorie: "CAN", niveau: 18},
+{mot: "REMPORTER", indice: "... la victoire", catégorie: "CAN", niveau: 19},
+{mot: "DEFENSE", indice: "C'est interdit de les laisser marquer", catégorie: "CAN", niveau: 20},
+{mot: "CONFRONTER", indice: "Etre Face quelque chose", catégorie: "CAN", niveau: 21},
+{mot: "ENTRAINER", indice: "Préparer l'équipe pour la compétition", catégorie: "CAN", niveau: 22},
+
+{mot: "CAPITAINE", indice: "Le leader sur le terrain", catégorie: "CAN", niveau: 23},
+{mot: "SUPPORTER", indice: "Les fans passionnés", catégorie: "CAN", niveau: 24},
+{mot: "RIVALITE", indice: "Compétition intense entre équipes", catégorie: "CAN", niveau: 25},
+{mot: "VICTOIRE", indice: "Objectif ultime de chaque équipe", catégorie: "CAN", niveau: 26},
+{mot: "TOURNOI", indice: "Série de matchs pour déterminer le champion", catégorie: "CAN", niveau: 27},
+{mot: "ATTAQUE", indice: "Chercher à marquer des buts", catégorie: "CAN", niveau: 28},
+{mot: "STRATEGIE", indice: "Plan de jeu élaboré", catégorie: "CAN", niveau: 29},
+{mot: "ATLAS", indice: "Le Maroc en a un", catégorie: "CAN", niveau: 30},
+
+{mot: "SENEGAL", indice: "Vainqueur de la CAN précédente", catégorie: "CAN", niveau: 31}, 
+{mot: "BOUNOU", indice: "Meilleur gardien d'Afrique en 2022", catégorie: "CAN", niveau: 32}, 
+{mot: "ETOO", indice: "Meilleur buteur de l'histoire de la CAN", catégorie: "CAN", niveau: 33},
+{mot: "SOUDAN", indice: "Pays organisateur de la première édition de la CAN", catégorie: "CAN", niveau: 34},
+{mot: "COPA", indice: "Célèbre gardien ivoirien", catégorie: "CAN", niveau: 35},
+{mot: "CAMEROUN", indice: "Vainqueur de la can 2017", catégorie:"CAN", niveau: 36},
+{mot: "OLEMBE", indice: "Stade de la finalede la CAN 2022", catégorie: "CAN", niveau: 37}, 
+{mot: "SHAKIRA", indice: "Qui a chanté Zamina mina", catégorie: "CAN", niveau: 38}, 
+{mot: "BAOULE", indice: "Quel est l'ethnie du joueur ivoirien Gervinho", catégorie: "CAN", niveau: 39},
+{mot: "TAMSIR", indice: "Quel artiste a donné la meilleur chanson de la CAN 2023", catégorie: "CAN", niveau: 40},
+{mot: "Mohamed", indice: "Comment s'appelle l'artiste maghrébin qui a participé à l'hymne officielle de la CAN", catégorie: "CAN", niveau: 41},
+
+
+
+
 
     // catégorie Objets
 
@@ -84,7 +168,7 @@ export const motsBibliotheque = [
     { mot: "MEDAILLE", indice: "Honneur accroché 🏅", catégorie: "Objets", niveau: 64 },
     { mot: "PENDULE", indice: "Horloge suspendue ⏰", catégorie: "Objets", niveau: 65 },
     { mot: "PELUCHE", indice: "Compagnon doux 🧸", catégorie: "Objets", niveau: 66 },
-    { mot: "CLOCHET", indice: "Son léger 🔔", catégorie: "Objets", niveau: 67 },
+    { mot: "CLOCHET", indice: "Son léger 🔔", catégorie: "Objets", niveaugg: 67 },
     { mot: "PANTOUFLE", indice: "Chaleur aux pieds 👡", catégorie: "Objets", niveau: 68 },
     { mot: "LIMONADE", indice: "Boisson pétillante 🍹", catégorie: "Objets", niveau: 69 },
     { mot: "MONTRE", indice: "Style temporel ⌚", catégorie: "Objets", niveau: 70 },
@@ -683,407 +767,93 @@ export const motsBibliotheque = [
 
 
   // catégorie Sport
-{ mot: "SKI", indice: "Sport de glisse sur la neige", catégorie
-: "Sport" },
-{ mot: "TIR", indice: "Action de viser et lancer", catégorie
-: "Sport" },
-{ mot: "GOLF", indice: "Sport de precision avec des clubs", catégorie
-: "Sport" },
-{ mot: "SURF", indice: "Sport de glisse sur les vagues", catégorie
-: "Sport" },
-{ mot: "RAFTING", indice: "Sport de descente en raft", catégorie
-: "Sport" },
-{ mot: "GYM", indice: "ActivitE physique", catégorie
-: "Sport" },
-{ mot: "ESCALADE", indice: "Sport de grimpe", catégorie
-: "Sport" },
-{ mot: "SKATE", indice: "Sport de glisse avec une planche", catégorie
-: "Sport" },
-{ mot: "NAGE", indice: "Action de nager", catégorie
-: "Sport" },
-{ mot: "BOXE", indice: "Sport de combat", catégorie
-: "Sport" },
-{ mot: "YOGA", indice: "Pratique physique et spirituelle", catégorie
-: "Sport" },
-{ mot: "CANNE", indice: "Equipement de peche", catégorie
-: "Sport" },
-{ mot: "VOLLEY", indice: "Sport de ballon et de filet", catégorie
-: "Sport" },
-{ mot: "JUDO", indice: "Art martial japonais", catégorie
-: "Sport" },
-{ mot: "CANOE", indice: "Sport nautique en canoë", catégorie
-: "Sport" },
-{ mot: "RUGBY", indice: "Sport de combat avec un ballon ovale", catégorie
-: "Sport" },
-{ mot: "TENNIS", indice: "Sport de raquette", catégorie
-: "Sport" },
-{ mot: "SPRINT", indice: "Course rapide", catégorie
-: "Sport" },
-{ mot: "MARCHE", indice: "ActivitE physique de deplacement", catégorie
-: "Sport" },
-{ mot: "LANCER", indice: "Action de projeter", catégorie
-: "Sport" },
-{ mot: "BADMINTON", indice: "Sport de raquette", catégorie
-: "Sport" },
-{ mot: "ROLLER", indice: "Sport de glisse avec des rollers", catégorie
-: "Sport" },
-{ mot: "SAUT", indice: "Action de sauter", catégorie
-: "Sport" },
-{ mot: "CURLING", indice: "Sport de glace avec des pierres", catégorie
-: "Sport" },
-{ mot: "HALTERE", indice: "Equipement de musculation", catégorie
-: "Sport" },
-{ mot: "LUTTE", indice: "Sport de combat", catégorie
-: "Sport" },
-{ mot: "PLONGEE", indice: "Sport de plongeon sousmarine", catégorie
-: "Sport" },
-{ mot: "VELO", indice: "Sport de deuxroues", catégorie
-: "Sport" },
-{ mot: "JAVELOT", indice: "Equipement de lancer", catégorie
-: "Sport" },
-{ mot: "SKI", indice: "Sport de glisse sur la neige", catégorie
-: "Sport" },
-{ mot: "TIR", indice: "Action de viser et lancer", catégorie
-: "Sport" },
-{ mot: "GOLF", indice: "Sport de precision avec des clubs", catégorie
-: "Sport" },
-{ mot: "SURF", indice: "Sport de glisse sur les vagues", catégorie
-: "Sport" },
-{ mot: "RAFTING", indice: "Sport de descente en raft", catégorie
-: "Sport" },
-{ mot: "GYM", indice: "ActivitE physique", catégorie
-: "Sport" },
-{ mot: "ESCALADE", indice: "Sport de grimpe", catégorie
-: "Sport" },
-{ mot: "SKATE", indice: "Sport de glisse avec une planche", catégorie
-: "Sport" },
-{ mot: "NAGE", indice: "Action de nager", catégorie
-: "Sport" },
-{ mot: "BOXE", indice: "Sport de combat", catégorie
-: "Sport" },
-{ mot: "YOGA", indice: "Pratique physique et spirituelle", catégorie
-: "Sport" },
-{ mot: "CANNE", indice: "Equipement de peche", catégorie
-: "Sport" },
-
-{ mot: "Etire", indice: "Action de s'Etirer", catégorie
-: "Sport" },
-{ mot: "Foulee", indice: "Longueur d'une enjambee en course", catégorie
-: "Sport" },
-{ mot: "Bond", indice: "Saut", catégorie
-: "Sport" },
-{ mot: "Evite", indice: "Action d'Eviter", catégorie
-: "Sport" },
-{ mot: "Plie", indice: "Action de se plier", catégorie
-: "Sport" },
-{ mot: "Rampe", indice: "Action de ramper", catégorie
-: "Sport" },
-{ mot: "PEdale", indice: "Action de pedaler", catégorie
-: "Sport" },
-{ mot: "Rame", indice: "Action de ramer", catégorie
-: "Sport" },
-{ mot: "Vole", indice: "Action de voler", catégorie
-: "Sport" },
-{ mot: "Surfe", indice: "Pratique le surf", catégorie
-: "Sport" },
-{ mot: "Marche", indice: "ActivitE physique de deplacement", catégorie
-: "Sport" },
-{ mot: "Grimpe", indice: "Action de grimper", catégorie
-: "Sport" },
-{ mot: "Passe", indice: "Action de transmettre le ballon", catégorie
-: "Sport" },
-{ mot: "Enchaine", indice: "Succession rapide d'actions", catégorie
-: "Sport" },
-{ mot: "Endurance", indice: "CapacitE à maintenir un effort", catégorie
-: "Sport" },
-{ mot: "Aïkido", indice: "Art martial japonais de defense", catégorie
-: "Sport" },
-{ mot: "Frappe", indice: "Coup portE avec force", catégorie
-: "Sport" },
-{ mot: "Garde", indice: "Position defensive", catégorie
-: "Sport" },
-
-{ mot: "DEfi", indice: "Challenge, Epreuve", catégorie
-: "Sport" },
-{ mot: "Coup", indice: "Action offensive", catégorie
-: "Sport" },
-{ mot: "Plongeon", indice: "Saut dans l'eau", catégorie
-: "Sport" },
-{ mot: "Attaque", indice: "Phase offensive", catégorie
-: "Sport" },
-{ mot: "Précision", indice: "Exactitude dans le geste", catégorie
-: "Sport" },
-{ mot: "Escrime", indice: "Sport de combat avec une arme", catégorie
-: "Sport" },
-{ mot: "Podium", indice: "Plateforme pour les vainqueurs", catégorie
-: "Sport" },
-{ mot: "Strategie", indice: "Plan d'action ElaborE", catégorie
-: "Sport" },
-{ mot: "DEfi", indice: "Challenge, Epreuve", catégorie
-: "Sport" },
-{ mot: "Coup", indice: "Action offensive", catégorie
-: "Sport" },
-{ mot: "Plongeon", indice: "Saut dans l'eau", catégorie
-: "Sport" },
-{ mot: "Attaque", indice: "Phase offensive", catégorie
-: "Sport" },
-{ mot: "Precision", indice: "Exactitude dans le geste", catégorie
-: "Sport" },
-{ mot: "Escrime", indice: "Sport de combat avec une arme", catégorie
-: "Sport" },
-{ mot: "Podium", indice: "Plateforme pour les vainqueurs", catégorie
-: "Sport" },
-{ mot: "Challenge", indice: "Competition, defi", catégorie
-: "Sport" },
-{ mot: "Champion", indice: "Vainqueur, leader", catégorie
-: "Sport" },
-{ mot: "Tournoi", indice: "Competition à Elimination", catégorie
-: "Sport" },
-{ mot: "Record", indice: "Meilleure performance enregistree", catégorie
-: "Sport" },
-{ mot: "Repos", indice: "PEriode de recuperation", catégorie
-: "Sport" },
-{ mot: "Equipe", indice: "Groupe de joueurs", catégorie
-: "Sport" },
-{ mot: "Gymnaste", indice: "Athlete en gymnastique", catégorie
-: "Sport" },
-{ mot: "Marathon", indice: "Course de longue distance", catégorie
-: "Sport" },
-{ mot: "Relais", indice: "Course avec transmission de temoin", catégorie
-: "Sport" },
-{ mot: "But", indice: "Objectif à atteindre", catégorie
-: "Sport" },
-{ mot: "Precision", indice: "Exactitude dans le geste", catégorie
-: "Sport" },
-{ mot: "Escrime", indice: "Sport de combat avec une arme", catégorie
-: "Sport" },
-{ mot: "Podium", indice: "Plateforme pour les vainqueurs", catégorie
-: "Sport" },
-{ mot: "Challenge", indice: "Competition, defi", catégorie
-: "Sport" },
-{ mot: "Champion", indice: "Vainqueur, leader", catégorie
-: "Sport" },
-{ mot: "Tournoi", indice: "Competition à Elimination", catégorie
-: "Sport" },
-{ mot: "Record", indice: "Meilleure performance enregistree", catégorie
-: "Sport" },
-{ mot: "Repos", indice: "PEriode de recuperation", catégorie
-: "Sport" },
-{ mot: "Equipe", indice: "Groupe de joueurs", catégorie
-: "Sport" },
-{ mot: "Gymnaste", indice: "Athlete en gymnastique", catégorie
-: "Sport" },
-{ mot: "Marathon", indice: "Course de longue distance", catégorie
-: "Sport" },
-{ mot: "Relais", indice: "Course avec transmission de temoin", catégorie
-: "Sport" },
-{ mot: "But", indice: "Objectif à atteindre", catégorie
-: "Sport" },
-{ mot: "Tactique", indice: "Strategie de jeu", catégorie
-: "Sport" },
-{ mot: "Judo", indice: "Art martial japonais", catégorie
-: "Sport" },
-{ mot: "Frappe", indice: "Coup portE avec force", catégorie
-: "Sport" },
-{ mot: "Garde", indice: "Position defensive", catégorie
-: "Sport" },
-{ mot: "Riposte", indice: "REponse offensive immediate", catégorie
-: "Sport" },
-
-{ mot: "Tacle", indice: "Action defensive au football", catégorie
-: "Sport" },
-{ mot: "Arret", indice: "Action de stopper la balle", catégorie
-: "Sport" },
-{ mot: "Rebond", indice: "Renvoi d'une balle apres rebond", catégorie
-: "Sport" },
-{ mot: "Contre", indice: "Action de bloquer un tir", catégorie
-: "Sport" },
-
-{ mot: "Precision", indice: "Exactitude dans le geste", catégorie
-: "Sport" },
-{ mot: "Escrime", indice: "Sport de combat avec une arme", catégorie
-: "Sport" },
-{ mot: "Podium", indice: "Plateforme pour les vainqueurs", catégorie
-: "Sport" },
-{ mot: "Challenge", indice: "Competition, defi", catégorie
-: "Sport" },
-{ mot: "Champion", indice: "Vainqueur, leader", catégorie
-: "Sport" },
-{ mot: "Tournoi", indice: "Competition à Elimination", catégorie
-: "Sport" },
-{ mot: "Record", indice: "Meilleure performance enregistree", catégorie
-: "Sport" },
-{ mot: "Repos", indice: "PEriode de recuperation", catégorie
-: "Sport" },
-{ mot: "Equipe", indice: "Groupe de joueurs", catégorie
-: "Sport" },
-
-{ mot: "Marathon", indice: "Course de longue distance", catégorie
-: "Sport" },
-{ mot: "Relais", indice: "Course avec transmission de temoin", catégorie
-: "Sport" },
-{ mot: "But", indice: "Objectif à atteindre", catégorie
-: "Sport" },
-{ mot: "Precision", indice: "Exactitude dans le geste", catégorie
-: "Sport" },
-{ mot: "Escrime", indice: "Sport de combat avec une arme", catégorie
-: "Sport" },
-{ mot: "Podium", indice: "Plateforme pour les vainqueurs", catégorie
-: "Sport" },
-{ mot: "Challenge", indice: "Competition, defi", catégorie
-: "Sport" },
-{ mot: "Champion", indice: "Vainqueur, leader", catégorie
-: "Sport" },
-{ mot: "Tournoi", indice: "Competition à Elimination", catégorie
-: "Sport" },
-{ mot: "Record", indice: "Meilleure performance enregistree", catégorie
-: "Sport" },
-{ mot: "Repos", indice: "PEriode de recuperation", catégorie
-: "Sport" },
-{ mot: "Equipe", indice: "Groupe de joueurs", catégorie
-: "Sport" },
-{ mot: "Gymnaste", indice: "Athlete en gymnastique", catégorie
-: "Sport" },
-{ mot: "Marathon", indice: "Course de longue distance", catégorie
-: "Sport" },
-{ mot: "Relais", indice: "Course avec transmission de temoin", catégorie
-: "Sport" },
-{ mot: "But", indice: "Objectif à atteindre", catégorie
-: "Sport" },
-{ mot: "Tactique", indice: "Strategie de jeu", catégorie
-: "Sport" },
-{ mot: "Judo", indice: "Art martial japonais", catégorie
-: "Sport" },
-{ mot: "Frappe", indice: "Coup portE avec force", catégorie
-: "Sport" },
-{ mot: "Garde", indice: "Position defensive", catégorie
-: "Sport" },
-{ mot: "Riposte", indice: "REponse offensive immediate", catégorie
-: "Sport" },
-{ mot: "Sprint", indice: "Course rapide", catégorie
-: "Sport" },
-{ mot: "Equilibre", indice: "Maintien stable du corps", catégorie
-: "Sport" },
-{ mot: "DEpasse", indice: "Passe un adversaire", catégorie
-: "Sport" },
-{ mot: "Surpasse", indice: "Etre meilleur que l'adversaire", catégorie
-: "Sport" },
-{ mot: "Champion", indice: "Meilleur competiteur", catégorie
-: "Sport" },
-{ mot: "Compteur", indice: "Dispositif de mesure de points", catégorie
-: "Sport" },
-{ mot: "Centrale", indice: "Position strategique", catégorie
-: "Sport" },
-{ mot: "Pivot", indice: "Joueur central pivotant", catégorie
-: "Sport" },
-{ mot: "Tacle", indice: "Action defensive au football", catégorie
-: "Sport" },
-{ mot: "Arret", indice: "Action de stopper la balle", catégorie
-: "Sport" },
-{ mot: "Rebond", indice: "Renvoi d'une balle apres rebond", catégorie
-: "Sport" },
-{ mot: "Contre", indice: "Action de bloquer un tir", catégorie
-: "Sport" },
-{ mot: "Escalade", indice: "Sport de grimpe", catégorie
-: "Sport" },
-
-{ mot: "DEfense", indice: "Protection du but ou du joueur", catégorie
-: "Sport" },
-{ mot: "Course", indice: "ActivitE physique de deplacement rapide", catégorie
-: "Sport" },
-{ mot: "Plongee", indice: "Saut dans l'eau", catégorie
-: "Sport" },
-{ mot: "Appui", indice: "Soutien stable", catégorie
-: "Sport" },
-{ mot: "Equipier", indice: "Membre de l'Equipe", catégorie
-: "Sport" },
-{ mot: "Score", indice: "Nombre de points marques", catégorie
-: "Sport" },
-{ mot: "Podium", indice: "Plateforme pour les vainqueurs", catégorie
-: "Sport" },
-{ mot: "Challenge", indice: "Competition, defi", catégorie
-: "Sport" },
-{ mot: "Champion", indice: "Vainqueur, leader", catégorie
-: "Sport" },
-{ mot: "Tournoi", indice: "Competition à Elimination", catégorie
-: "Sport" },
-{ mot: "Record", indice: "Meilleure performance enregistree", catégorie
-: "Sport" },
-{ mot: "Repos", indice: "PEriode de recuperation", catégorie
-: "Sport" },
-{ mot: "Equipe", indice: "Groupe de joueurs", catégorie
-: "Sport" },
-{ mot: "Gymnaste", indice: "Athlete en gymnastique", catégorie
-: "Sport" },
-{ mot: "Marathon", indice: "Course de longue distance", catégorie
-: "Sport" },
-{ mot: "Relais", indice: "Course avec transmission de temoin", catégorie
-: "Sport" },
-{ mot: "But", indice: "Objectif à atteindre", catégorie
-: "Sport" },
-{ mot: "Tactique", indice: "Strategie de jeu", catégorie
-: "Sport" },
-{ mot: "Judo", indice: "Art martial japonais", catégorie
-: "Sport" },
-{ mot: "Frappe", indice: "Coup portE avec force", catégorie
-: "Sport" },
-{ mot: "Garde", indice: "Position defensive", catégorie
-: "Sport" },
-{ mot: "Riposte", indice: "REponse offensive immediate", catégorie
-: "Sport" },
-{ mot: "Sprint", indice: "Course rapide", catégorie
-: "Sport" },
-{ mot: "Equilibre", indice: "Maintien stable du corps", catégorie
-: "Sport" },
-{ mot: "DEpasse", indice: "Passe un adversaire", catégorie
-: "Sport" },
-{ mot: "Surpasse", indice: "Etre meilleur que l'adversaire", catégorie
-: "Sport" },
-{ mot: "Champion", indice: "Meilleur competiteur", catégorie
-: "Sport" },
-{ mot: "Compteur", indice: "Dispositif de mesure de points", catégorie
-: "Sport" },
-{ mot: "Centrale", indice: "Position strategique", catégorie
-: "Sport" },
-{ mot: "Pivot", indice: "Joueur central pivotant", catégorie
-: "Sport" },
-{ mot: "Tacle", indice: "Action defensive au football", catégorie
-: "Sport" },
-{ mot: "Arret", indice: "Action de stopper la balle", catégorie
-: "Sport" },
-{ mot: "Rebond", indice: "Renvoi d'une balle apres rebond", catégorie
-: "Sport" },
-{ mot: "Contre", indice: "Action de bloquer un tir", catégorie
-: "Sport" },
-{ mot: "Escalade", indice: "Sport de grimpe", catégorie
-: "Sport" },
-{ mot: "Voltige", indice: "Figure acrobatique", catégorie
-: "Sport" },
-{ mot: "DEfense", indice: "Protection du but ou du joueur", catégorie
-: "Sport" },
-{ mot: "Course", indice: "ActivitE physique de deplacement rapide", catégorie
-: "Sport" },
-{ mot: "Plongee", indice: "Saut dans l'eau", catégorie
-: "Sport" },
-{ mot: "Appui", indice: "Soutien stable", catégorie
-: "Sport" },
-{ mot: "Equipier", indice: "Membre de l'Equipe", catégorie
-: "Sport" },
-{ mot: "Score", indice: "Nombre de points marques", catégorie
-: "Sport" },
-{ mot: "Spectacle", indice: "Attraction sportive", catégorie
-: "Sport" },
-{ mot: "Aventure", indice: "Experience sportive excitante", catégorie
-: "Sport" },
-{ mot: "DEfenseur", indice: "Joueur chargE de proteger", catégorie
-: "Sport" },
-{ mot: "RivalitE", indice: "Concurrence intense", catégorie
-: "Sport" },
-{ mot: "Strategie", indice: "Plan d'action ElaborE", catégorie
-: "Sport" },
-{ mot: "DEfi", indice: "Challenge, Epreuve", catégorie
-: "Sport" },
-
+  { mot: "SKI", indice: "Sport de glisse sur la neige", catégorie: "Sport", niveau: 637 },
+  { mot: "GOLF", indice: "Sport de precision avec des clubs", catégorie: "Sport", niveau: 638 },
+  { mot: "SURF", indice: "Sport de glisse sur les vagues", catégorie: "Sport", niveau: 639 },
+  { mot: "RAFTING", indice: "Sport de descente en raft", catégorie: "Sport", niveau: 640 },
+  { mot: "GYM", indice: "Activite physique", catégorie: "Sport", niveau: 641 },
+  { mot: "ESCALADE", indice: "Sport de grimpe", catégorie: "Sport", niveau: 642 },
+  { mot: "NAGE", indice: "Action de nager", catégorie: "Sport", niveau: 643 },
+  { mot: "BOXE", indice: "Sport de combat", catégorie: "Sport", niveau: 644 },
+  { mot: "YOGA", indice: "Pratique physique et spirituelle", catégorie: "Sport", niveau: 645 },
+  { mot: "CANNE", indice: "Equipement de peche", catégorie: "Sport", niveau: 646 },
+  { mot: "VOLLEY", indice: "Sport de ballon et de filet", catégorie: "Sport", niveau: 647 },
+  { mot: "JUDO", indice: "Art martial japonais", catégorie: "Sport", niveau: 648 },
+  { mot: "CANOE", indice: "Sport nautique en canoe", catégorie: "Sport", niveau: 649 },
+  { mot: "RUGBY", indice: "Sport de combat avec un ballon ovale", catégorie: "Sport", niveau: 650 },
+  { mot: "TENNIS", indice: "Sport de raquette", catégorie: "Sport", niveau: 651 },
+  { mot: "SPRINT", indice: "Course rapide", catégorie: "Sport", niveau: 652 },
+  { mot: "MARCHE", indice: "Activite physique de deplacement", catégorie: "Sport", niveau: 653 },
+  { mot: "LANCER", indice: "Action de projeter", catégorie: "Sport", niveau: 654 },
+  { mot: "BADMINTON", indice: "Sport de raquette", catégorie: "Sport", niveau: 655 },
+  { mot: "ROLLER", indice: "Sport de glisse avec des rollers", catégorie: "Sport", niveau: 656 },
+  { mot: "SAUT", indice: "Action de sauter", catégorie: "Sport", niveau: 657 },
+  { mot: "CURLING", indice: "Sport de glace avec des pierres", catégorie: "Sport", niveau: 658 },
+  { mot: "HALTERE", indice: "Equipement de musculation", catégorie: "Sport", niveau: 659 },
+  { mot: "LUTTE", indice: "Sport de combat", catégorie: "Sport", niveau: 660 },
+  { mot: "PLONGEE", indice: "Sport de plongeon sousmarine", catégorie: "Sport", niveau: 661 },
+  { mot: "VELO", indice: "Sport de deuxroues", catégorie: "Sport", niveau: 662 },
+  { mot: "JAVELOT", indice: "Equipement de lancer", catégorie: "Sport", niveau: 663 },
+  { mot: "TIR", indice: "Action de viser et lancer", catégorie: "Sport", niveau: 664 },
+  { mot: "SKATE", indice: "Sport de glisse avec une planche", catégorie: "Sport", niveau: 665 },
+  { mot: "ETIRE", indice: "Action de s'Etirer", catégorie: "Sport", niveau: 666 },
+  { mot: "FOULEE", indice: "Longueur d'une enjambee en course", catégorie: "Sport", niveau: 667 },
+  { mot: "BOND", indice: "Saut", catégorie: "Sport", niveau: 668 },
+  { mot: "EVITE", indice: "Action d'Eviter", catégorie: "Sport", niveau: 669 },
+  { mot: "PLIE", indice: "Action de se plier", catégorie: "Sport", niveau: 670 },
+  { mot: "RAMPE", indice: "Action de ramper", catégorie: "Sport", niveau: 671 },
+  { mot: "PEDALE", indice: "Action de pedaler", catégorie: "Sport", niveau: 672 },
+  { mot: "RAME", indice: "Action de ramer", catégorie: "Sport", niveau: 673 },
+  { mot: "VOLE", indice: "Action de voler", catégorie: "Sport", niveau: 674 },
+  { mot: "SURFE", indice: "Pratique le surf", catégorie: "Sport", niveau: 675 },
+  { mot: "MARCHE", indice: "Activite physique de deplacement", catégorie: "Sport", niveau: 676 },
+  { mot: "GRIMPE", indice: "Action de grimper", catégorie: "Sport", niveau: 677 },
+  { mot: "PASSE", indice: "Action de transmettre le ballon", catégorie: "Sport", niveau: 678 },
+  { mot: "ENCHAINE", indice: "Succession rapide d'actions", catégorie: "Sport", niveau: 679 },
+  { mot: "ENDURANCE", indice: "Capacite à maintenir un effort", catégorie: "Sport", niveau: 680 },
+  { mot: "AIKIDO", indice: "Art martial japonais de defense", catégorie: "Sport", niveau: 681 },
+  { mot: "FRAPPE", indice: "Coup porte avec force", catégorie: "Sport", niveau: 682 },
+  { mot: "GARDE", indice: "Position defensive", catégorie: "Sport", niveau: 683 },
+  { mot: "DEFENSE", indice: "Protection du but ou du joueur", catégorie: "Sport", niveau: 684 },
+  { mot: "COURSE", indice: "Activite physique de deplacement rapide", catégorie: "Sport", niveau: 685 },
+  { mot: "PLONGEE", indice: "Saut dans l'eau", catégorie: "Sport", niveau: 686 },
+  { mot: "APPUY", indice: "Soutien stable", catégorie: "Sport", niveau: 687 },
+  { mot: "EQUIPIER", indice: "Membre de l'équipe", catégorie: "Sport", niveau: 688 },
+  { mot: "SCORE", indice: "Nombre de points marques", catégorie: "Sport", niveau: 689 },
+  { mot: "PODIUM", indice: "Plateforme pour les vainqueurs", catégorie: "Sport", niveau: 690 },
+  { mot: "CHALLENGE", indice: "Competition, defi", catégorie: "Sport", niveau: 691 },
+  { mot: "CHAMPION", indice: "Vainqueur, leader", catégorie: "Sport", niveau: 692 },
+  { mot: "TOURNOI", indice: "Competition à Elimination", catégorie: "Sport", niveau: 693 },
+  { mot: "RECORD", indice: "Meilleure performance enregistree", catégorie: "Sport", niveau: 694 },
+  { mot: "REPOS", indice: "Periode de recuperation", catégorie: "Sport", niveau: 695 },
+  { mot: "EQUIPE", indice: "Groupe de joueurs", catégorie: "Sport", niveau: 696 },
+  { mot: "GYMNASTE", indice: "Athlete en gymnastique", catégorie: "Sport", niveau: 697 },
+  { mot: "MARATHON", indice: "Course de longue distance", catégorie: "Sport", niveau: 698 },
+  { mot: "RELAIS", indice: "Course avec transmission de temoin", catégorie: "Sport", niveau: 699 },
+  { mot: "BUT", indice: "Objectif à atteindre", catégorie: "Sport", niveau: 700 },
+  { mot: "TACTIQUE", indice: "Strategie de jeu", catégorie: "Sport", niveau: 701 },
+  { mot: "RIPOSTE", indice: "Reponse offensive immediate", catégorie: "Sport", niveau: 702 },
+  { mot: "TACLE", indice: "Action defensive au football", catégorie: "Sport", niveau: 703 },
+  { mot: "ARRET", indice: "Action de stopper la balle", catégorie: "Sport", niveau: 704 },
+  { mot: "REBOND", indice: "Renvoi d'une balle apres rebond", catégorie: "Sport", niveau: 705 },
+  { mot: "CONTRE", indice: "Action de bloquer un tir", catégorie: "Sport", niveau: 706 },
+  { mot: "SPRINT", indice: "Course rapide", catégorie: "Sport", niveau: 707 },
+  { mot: "EQUILIBRE", indice: "Maintien stable du corps", catégorie: "Sport", niveau: 708 },
+  { mot: "DEPASSE", indice: "Passe un adversaire", catégorie: "Sport", niveau: 709 },
+  { mot: "SURPASSE", indice: "Etre meilleur que l'adversaire", catégorie: "Sport", niveau: 710 },
+  { mot: "CHAMPION", indice: "Meilleur competiteur", catégorie: "Sport", niveau: 711 },
+  { mot: "COMPTEUR", indice: "Dispositif de mesure de points", catégorie: "Sport", niveau: 712 },
+  { mot: "CENTRALE", indice: "Position strategique", catégorie: "Sport", niveau: 713 },
+  { mot: "PIVOT", indice: "Joueur central pivotant", catégorie: "Sport", niveau: 714 },
+  { mot: "VOLTIGE", indice: "Figure acrobatique", catégorie: "Sport", niveau: 715 },
+  { mot: "PLONGEE", indice: "Saut dans l'eau", catégorie: "Sport", niveau: 716 },
+  { mot: "SPECTACLE", indice: "Attraction sportive", catégorie: "Sport", niveau: 717 },
+  { mot: "AVENTURE", indice: "Experience sportive excitante", catégorie: "Sport", niveau: 718 },
+  { mot: "DEFENSEUR", indice: "Joueur charge de proteger", catégorie: "Sport", niveau: 719 },
+  { mot: "RIVALITE", indice: "Concurrence intense", catégorie: "Sport", niveau: 720 },
+  { mot: "STRATEGIE", indice: "Plan d'action Elabore", catégorie: "Sport", niveau: 721 },
+  { mot: "DEFI", indice: "Challenge, Epreuve", catégorie: "Sport", niveau: 722 },
+  
 
 
 
@@ -1248,8 +1018,6 @@ export const motsBibliotheque = [
 : "Couleurs" },
   { mot: "ZINC", indice: "Gris metallique", catégorie
 : "Couleurs" },
-  { mot: "CANNELLE", indice: "Marron EpicE", catégorie
-: "Couleurs" },
   { mot: "CARMIN", indice: "Rouge vif", catégorie
 : "Couleurs" },
   { mot: "CELADON", indice: "Vert pale", catégorie
@@ -1346,8 +1114,7 @@ export const motsBibliotheque = [
 : "Couleurs" },
   { mot: "XANADU", indice: "Vert pale", catégorie
 : "Couleurs" },
-  { mot: "YOGA", indice: "Jaune doux", catégorie
-: "Couleurs" },
+
   { mot: "ZIGZAG", indice: "Motif alternant", catégorie
 : "Couleurs" },
   { mot: "ALBATRE", indice: "Blanc lumineux", catégorie
@@ -1787,8 +1554,7 @@ export const motsBibliotheque = [
  : "Pays" },
  { mot: "MEXIQUE", indice: "Sombreros et tacos", catégorie
  : "Pays" },
- { mot: "NORVEGE", indice: "Fjords et ski", catégorie
- : "Pays" },
+ 
  { mot: "PAYSBAS", indice: "Moulins et tulipes", catégorie
  : "Pays" },
  { mot: "PEROU", indice: "Machupicchu et lamas", catégorie
@@ -2755,7 +2521,6 @@ export const motsBibliotheque = [
   { mot: "FERRY", indice: "Guide des traversées", catégorie: "Véhicules" },
   { mot: "FOURGON", indice: "Magicien des utilitaires", catégorie: "Véhicules" },
   { mot: "ROUE", indice: "Magie circulaire", catégorie: "Véhicules" },
-  { mot: "SKI", indice: "Magie des montagnes enneigées", catégorie: "Véhicules" },
   { mot: "TRIPLACE", indice: "Trois places, une aventure", catégorie: "Véhicules" },
   { mot: "KAYAK", indice: "Pagaie enchantée", catégorie: "Véhicules" },
   { mot: "BIPALE", indice: "Avion aux ailes doubles", catégorie: "Véhicules" },
@@ -2770,7 +2535,6 @@ export const motsBibliotheque = [
   { mot: "RAIL", indice: "Chemin de fer mystique", catégorie: "Véhicules" },
   { mot: "HOTROD", indice: "Voiture ensorcelée pour la vitesse", catégorie: "Véhicules" },
   { mot: "AVIRON", indice: "Baguette propulsive aquatique", catégorie: "Véhicules" },
-  { mot: "SURF", indice: "Planche de magie sur les vagues", catégorie: "Véhicules" },
   { mot: "BARGE", indice: "Géante plate-forme flottante", catégorie: "Véhicules" },
   { mot: "PIROGUE", indice: "Canot féérique à fond plat", catégorie: "Véhicules" },
   { mot: "GONDOLE", indice: "Bateau vénitien romantique", catégorie: "Véhicules" },
@@ -2786,7 +2550,6 @@ export const motsBibliotheque = [
   { mot: "JOYSTICK", indice: "Baguette de contrôle aérien", catégorie: "Véhicules" },
   { mot: "COUPE", indice: "Carrosse élégant", catégorie: "Véhicules" },
   { mot: "KITESURF", indice: "Danse avec cerf-volant sur l'eau", catégorie: "Véhicules" },
-  { mot: "CANOE", indice: "Canot féerique à pagaie", catégorie: "Véhicules" },
   { mot: "SPRINT", indice: "Course magique à grande vitesse", catégorie: "Véhicules" },
   { mot: "AUTOTOUR", indice: "Voyage enchanté en voiture", catégorie: "Véhicules" },
   { mot: "FAUTEUIL", indice: "Siège individuel volant", catégorie: "Véhicules" },
@@ -2814,7 +2577,6 @@ export const motsBibliotheque = [
   { mot: "RIB", indice: "Bateau pneumatique rigide", catégorie: "Véhicules" },
   { mot: "CALECHE", indice: "Voiture hippomobile", catégorie: "Véhicules" },
   { mot: "MINIBUS", indice: "Petit autobus", catégorie: "Véhicules" },
-  { mot: "SKATE", indice: "Planche à roulettes", catégorie: "Véhicules" },
   { mot: "RADEAU", indice: "Embarcation de fortune", catégorie: "Véhicules" },
   { mot: "DELTA", indice: "Aile delta", catégorie: "Véhicules" },
   { mot: "WAGON", indice: "Partie d'un train pour les marchandises", catégorie: "Véhicules" },
@@ -2840,7 +2602,6 @@ export const motsBibliotheque = [
   { mot: "YACHT", indice: "Bateau de plaisance de grande taille", catégorie: "Véhicules" },
   { mot: "CABINE", indice: "Partie fermée d'un véhicule", catégorie: "Véhicules" },
   { mot: "BATEAU", indice: "Embarcation de taille moyenne", catégorie: "Véhicules" },
-  { mot: "SKATE", indice: "Planche à roulettes", catégorie: "Véhicules" },
   { mot: "VOLVO", indice: "Marque de voiture suédoise", catégorie: "Véhicules" },
   { mot: "TRAM", indice: "Transport en commun sur rails", catégorie: "Véhicules" },
   { mot: "ZODIAC", indice: "Type d'embarcation pneumatique", catégorie: "Véhicules" },

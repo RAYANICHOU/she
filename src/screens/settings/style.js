@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginBottom: 0.02 * windowWidth,
   },
   optionTextDark: {
-    fontSize: 0.04 * windowWidth, // Utilisation de % pour rendre la taille de police proportionnelle à la largeur de l'écran
+    fontSize: 0.04 * windowWidth,
   },
 
 
